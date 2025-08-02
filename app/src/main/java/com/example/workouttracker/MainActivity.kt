@@ -1,4 +1,3 @@
-
 package com.example.workouttracker
 
 import android.content.Intent
@@ -22,9 +21,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    WorkoutSelectionScreen { day ->
-                        val intent = Intent(this, WorkoutDetailActivity::class.java)
-                        intent.putExtra("workout_day", day)
+                    WorkoutSelectionScreen { type, mode ->
+                        val intent = Intent(this, WorkoutDetailActivity::class.java).apply {
+                            putExtra("workout_type", type)
+                            putExtra("workout_mode", mode)
+                        }
                         startActivity(intent)
                     }
                 }
@@ -34,17 +35,32 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun WorkoutSelectionScreen(onSelect: (String) -> Unit) {
-    val days = listOf("Day A - Push", "Day B - Pull", "Day C - Legs/Core")
+fun WorkoutSelectionScreen(onNavigate: (String, String) -> Unit) {
+    val workouts = listOf("Push", "Pull", "Legs/Core")
     Column(modifier = Modifier.padding(16.dp)) {
-        days.forEach { day ->
-            Button(
-                onClick = { onSelect(day) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-            ) {
-                Text(day)
+        workouts.forEach { type ->
+            WorkoutCard(type = type, onNavigate = onNavigate)
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+    }
+}
+
+@Composable
+fun WorkoutCard(type: String, onNavigate: (String, String) -> Unit) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        elevation = CardDefaults.cardElevation()
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(text = "$type Workout", style = MaterialTheme.typography.headlineSmall)
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                Button(onClick = { onNavigate(type, "Strength") }) {
+                    Text("Strength")
+                }
+                Button(onClick = { onNavigate(type, "Metcon") }) {
+                    Text("Metcon")
+                }
             }
         }
     }
