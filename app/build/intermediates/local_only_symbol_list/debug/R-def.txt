@@ -2,5 +2,16 @@ R_DEF: Internal format may change without notice
 local
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+id btnDayA
+id btnDayB
+id btnDayC
+id layoutExercises
+id layoutWorkoutDetails
+id layoutWorkoutTypes
+id scrollView
+id tvTitle
+id tvWorkoutTitle
+layout activity_main
+layout activity_workout_detail
 mipmap ic_launcher
 mipmap ic_launcher_round

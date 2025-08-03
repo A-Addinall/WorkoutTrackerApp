@@ -1,35 +1,16 @@
 package com.example.workouttracker.ui
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import com.example.workouttracker.MainActivity
-import com.example.workouttracker.ui.theme.WorkoutTrackerTheme
-import com.example.workouttracker.viewmodel.WorkoutViewModel
+import androidx.appcompat.app.AppCompatActivity
+import com.example.workouttracker.R
 
-class WorkoutDetailActivity : ComponentActivity() {
-    private val viewModel: WorkoutViewModel by viewModels()
+class WorkoutDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_workout_detail)
 
-        val type = intent.getStringExtra("workout_type") ?: "Unknown"
-        val category = intent.getStringExtra("workout_category") ?: "Unknown"
-
-        setContent {
-            WorkoutTrackerTheme {
-                WorkoutDetailScreen(
-                    type = type,
-                    category = category,
-                    viewModel = viewModel,
-                    onBack = { finish() },
-                    onHome = {
-                        startActivity(Intent(this, MainActivity::class.java))
-                    }
-                )
-            }
-        }
+        // Initialize views and set up the activity
+        // You can add more functionality here later
     }
 }
