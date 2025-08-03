@@ -2,11 +2,12 @@
     package="com.example.workouttracker">
 
     <application
+        android:name=".WorkoutApplication"
         android:label="Workout Tracker"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        android:theme="@style/Theme.Material3.Light.NoActionBar">
 
-        <activity android:name=".ui.WorkoutDetailActivity" />
+    <activity android:name=".ui.WorkoutDetailActivity" />
 
         <activity
             android:name=".MainActivity"
