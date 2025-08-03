@@ -1,11 +1,15 @@
 [
     {
-        "merged": "com.example.workouttracker.app-merged_res-42:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
-        "source": "com.example.workouttracker.app-pngs-38:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-hdpi_safitness_round.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-hdpi/safitness_round.webp"
     },
     {
         "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "com.example.workouttracker.app-main-44:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-mdpi/ic_launcher_foreground.webp"
     },
     {
         "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xhdpi_ic_launcher_round.webp.flat",
@@ -16,16 +20,8 @@
         "source": "com.example.workouttracker.app-main-44:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.workouttracker.app-main-44:/mipmap-mdpi/ic_launcher_round.webp"
-    },
-    {
-        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.workouttracker.app-main-44:/mipmap-mdpi/ic_launcher.webp"
-    },
-    {
-        "merged": "com.example.workouttracker.app-merged_res-42:/drawable-xhdpi_ic_launcher_foreground.png.flat",
-        "source": "com.example.workouttracker.app-pngs-38:/drawable-xhdpi/ic_launcher_foreground.png"
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xhdpi_safitness_round.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xhdpi/safitness_round.webp"
     },
     {
         "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxhdpi_ic_launcher.webp.flat",
@@ -36,16 +32,12 @@
         "source": "com.example.workouttracker.app-main-44:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.example.workouttracker.app-merged_res-42:/layout_activity_main.xml.flat",
-        "source": "com.example.workouttracker.app-main-44:/layout/activity_main.xml"
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-hdpi_safitness.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-hdpi/safitness.webp"
     },
     {
-        "merged": "com.example.workouttracker.app-merged_res-42:/drawable-ldpi_ic_launcher_foreground.png.flat",
-        "source": "com.example.workouttracker.app-pngs-38:/drawable-ldpi/ic_launcher_foreground.png"
-    },
-    {
-        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.workouttracker.app-main-44:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-mdpi_safitness.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-mdpi/safitness.webp"
     },
     {
         "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
@@ -60,28 +52,128 @@
         "source": "com.example.workouttracker.app-main-44:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.workouttracker.app-merged_res-42:/drawable-hdpi_ic_launcher_foreground.png.flat",
-        "source": "com.example.workouttracker.app-pngs-38:/drawable-hdpi/ic_launcher_foreground.png"
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxhdpi_safitness_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xxhdpi/safitness_foreground.webp"
     },
     {
-        "merged": "com.example.workouttracker.app-merged_res-42:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.workouttracker.app-main-44:/drawable/ic_launcher_background.xml"
+        "merged": "com.example.workouttracker.app-merged_res-42:/drawable-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.workouttracker.app-pngs-38:/drawable-hdpi/ic_launcher_foreground.png"
     },
     {
         "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "com.example.workouttracker.app-main-44:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
         "merged": "com.example.workouttracker.app-merged_res-42:/drawable-mdpi_ic_launcher_foreground.png.flat",
         "source": "com.example.workouttracker.app-pngs-38:/drawable-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-mdpi_safitness_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-mdpi/safitness_foreground.webp"
     },
     {
         "merged": "com.example.workouttracker.app-merged_res-42:/drawable-xxxhdpi_ic_launcher_foreground.png.flat",
         "source": "com.example.workouttracker.app-pngs-38:/drawable-xxxhdpi/ic_launcher_foreground.png"
     },
     {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxxhdpi_safitness_round.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xxxhdpi/safitness_round.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xhdpi_safitness_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xhdpi/safitness_foreground.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-mdpi_safitness_round.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-mdpi/safitness_round.webp"
+    },
+    {
         "merged": "com.example.workouttracker.app-merged_res-42:/drawable-xxhdpi_ic_launcher_foreground.png.flat",
         "source": "com.example.workouttracker.app-pngs-38:/drawable-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxxhdpi_safitness.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xxxhdpi/safitness.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-anydpi-v26_safitness_round.xml.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-anydpi-v26/safitness_round.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.workouttracker.app-pngs-38:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-hdpi_safitness_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-hdpi/safitness_foreground.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/drawable-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.workouttracker.app-pngs-38:/drawable-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/layout_activity_main.xml.flat",
+        "source": "com.example.workouttracker.app-main-44:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-anydpi-v26_safitness.xml.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-anydpi-v26/safitness.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/drawable-ldpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.workouttracker.app-pngs-38:/drawable-ldpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxhdpi_safitness_round.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xxhdpi/safitness_round.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xhdpi_safitness.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xhdpi/safitness.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.workouttracker.app-main-44:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxxhdpi_safitness_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xxxhdpi/safitness_foreground.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxhdpi_safitness.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-xxhdpi/safitness.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.workouttracker.app-main-44:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.workouttracker.app-merged_res-42:/drawable_safitness_background.xml.flat",
+        "source": "com.example.workouttracker.app-main-44:/drawable/safitness_background.xml"
     },
     {
         "merged": "com.example.workouttracker.app-merged_res-42:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",

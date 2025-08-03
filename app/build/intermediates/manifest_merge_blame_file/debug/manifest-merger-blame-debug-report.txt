@@ -29,8 +29,8 @@
 21        android:extractNativeLibs="true"
 22        android:icon="@mipmap/ic_launcher"
 22-->C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:7:9-43
-23        android:label="Workout Tracker"
-23-->C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:6:9-40
+23        android:label="S.A.Fitness"
+23-->C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:6:9-36
 24        android:theme="@style/Theme.Material3.Light.NoActionBar" >
 24-->C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:8:9-65
 25        <activity android:name="com.example.workouttracker.ui.WorkoutDetailActivity" />

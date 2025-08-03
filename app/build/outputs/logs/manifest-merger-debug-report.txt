@@ -92,7 +92,7 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\aaddi\.gradle\cach
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.12.0] C:\Users\aaddi\.gradle\caches\transforms-3\cdd32d86ab150353e42b32bc666a97d3\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
 	android:label
-		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:6:9-40
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:6:9-36
 	android:icon
 		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:7:9-43
 	android:theme
