@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workouttracker.app-mergeDebugResources-41:/values-pt-rPT/values-pt-rPT.xml",
+            "outputFile": "com.example.workouttracker.app-mergeDebugResources-46:/values-pt-rPT/values-pt-rPT.xml",
             "map": [
                 {
                     "source": "C:\\Users\\aaddi\\.gradle\\caches\\transforms-3\\0573e0b6eadd4737a938b98350a466a1\\transformed\\jetified-material3-1.1.2\\res\\values-pt-rPT\\values-pt-rPT.xml",

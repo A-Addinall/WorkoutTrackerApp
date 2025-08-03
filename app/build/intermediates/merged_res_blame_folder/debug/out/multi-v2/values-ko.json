@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workouttracker.app-mergeDebugResources-41:/values-ko/values-ko.xml",
+            "outputFile": "com.example.workouttracker.app-mergeDebugResources-46:/values-ko/values-ko.xml",
             "map": [
                 {
                     "source": "C:\\Users\\aaddi\\.gradle\\caches\\transforms-3\\cdd32d86ab150353e42b32bc666a97d3\\transformed\\core-1.12.0\\res\\values-ko\\values-ko.xml",

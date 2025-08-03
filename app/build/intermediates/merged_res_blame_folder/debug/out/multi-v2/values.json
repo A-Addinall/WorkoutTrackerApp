@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.workouttracker.app-mergeDebugResources-41:/values/values.xml",
+            "outputFile": "com.example.workouttracker.app-mergeDebugResources-46:/values/values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\aaddi\\.gradle\\caches\\transforms-3\\d26a3e617213b4b21579075463a416f9\\transformed\\jetified-customview-poolingcontainer-1.0.0\\res\\values\\values.xml",
