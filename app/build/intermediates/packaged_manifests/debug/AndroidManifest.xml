@@ -20,7 +20,7 @@
         android:debuggable="true"
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Workout Tracker"
+        android:label="S.A.Fitness"
         android:theme="@style/Theme.Material3.Light.NoActionBar" >
         <activity android:name="com.example.workouttracker.ui.WorkoutDetailActivity" />
         <activity

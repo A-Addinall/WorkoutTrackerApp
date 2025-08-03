@@ -3,7 +3,7 @@
 
     <application
         android:name=".WorkoutApplication"
-        android:label="Workout Tracker"
+        android:label="S.A.Fitness"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/Theme.Material3.Light.NoActionBar">
 
