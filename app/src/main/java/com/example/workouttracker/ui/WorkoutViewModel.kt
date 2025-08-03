@@ -12,7 +12,10 @@ class WorkoutViewModel(private val repo: WorkoutRepository) : ViewModel() {
     val lastWeights   = MutableLiveData<Map<Int, Double>>()   // exId → kg
     val lastMetconSec = MutableLiveData<Long>()               // seconds (-wtId row)
 
-    init { viewModelScope.launch { workoutTypes.value = repo.getWorkoutTypes() } }
+    init {
+        viewModelScope.launch {
+            repo.initializeDatabase()
+            workoutTypes.value = repo.getWorkoutTypes() } }
 
     fun loadWorkout(wtId: Int) = viewModelScope.launch {
         val exList = repo.getExercises(wtId)
