@@ -1,9 +1,11 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:1:1-21:12
-INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:1:1-21:12
-INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:1:1-21:12
-INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:1:1-21:12
+ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:1:1-21:12
+INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:1:1-21:12
+INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:1:1-21:12
+INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:1:1-21:12
+MERGED from [androidx.room:room-ktx:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\12a8245484957b41260cb9ba76c75823\transformed\jetified-room-ktx-2.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:17:1-31:12
 MERGED from [androidx.compose.material3:material3:1.1.2] C:\Users\aaddi\.gradle\caches\transforms-3\0573e0b6eadd4737a938b98350a466a1\transformed\jetified-material3-1.1.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.material:material:1.4.1] C:\Users\aaddi\.gradle\caches\transforms-3\e4c1b56b41981e03c582c2cc3ca07a03\transformed\jetified-material-1.4.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.material:material-ripple:1.4.1] C:\Users\aaddi\.gradle\caches\transforms-3\0b5e9f510c89cffd641a01ce1b662e58\transformed\jetified-material-ripple-1.4.1\AndroidManifest.xml:17:1-22:12
@@ -24,41 +26,46 @@ MERGED from [androidx.compose.ui:ui-tooling-android:1.5.0] C:\Users\aaddi\.gradl
 MERGED from [androidx.activity:activity:1.7.2] C:\Users\aaddi\.gradle\caches\transforms-3\e87bd412b776e4d92c3852fabdfde98c\transformed\jetified-activity-1.7.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.activity:activity-compose:1.7.2] C:\Users\aaddi\.gradle\caches\transforms-3\84010a3bd9e5ba333e64c1e1ed9f978e\transformed\jetified-activity-compose-1.7.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.activity:activity-ktx:1.7.2] C:\Users\aaddi\.gradle\caches\transforms-3\86aa43761f925f8b23a716f9282a0e3a\transformed\jetified-activity-ktx-1.7.2\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\d26a3e617213b4b21579075463a416f9\transformed\jetified-customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\e08d39d646a813e20c59e327198323bf\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\38e14d27a91aa99a759781e063a01aff\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.emoji2:emoji2:1.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\5918c6640af00b4589c5b12b5b2bc26d\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:17:1-35:12
 MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\634e9b7d12ae9c92ee73f96ad50e2165\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:17:1-35:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\5d9252b0f076cd9ac487c40b7dee8838\transformed\lifecycle-livedata-core-2.6.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\5ebb5124c7c1da815815072a0e595166\transformed\jetified-lifecycle-viewmodel-ktx-2.6.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\a209e9e0cb971ae71750d8ec1b9e291a\transformed\lifecycle-viewmodel-2.6.2\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\e08d39d646a813e20c59e327198323bf\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\38e14d27a91aa99a759781e063a01aff\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\9323d7de5dbe8bdc7e70a026a35ad376\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.2\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\d26a3e617213b4b21579075463a416f9\transformed\jetified-customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.core:core-ktx:1.12.0] C:\Users\aaddi\.gradle\caches\transforms-3\34a1e83f3c9f90678bfbc4b29c6d16ca\transformed\jetified-core-ktx-1.12.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\2b0e0d7d49a6c03cf9cbf62f7f113d73\transformed\jetified-autofill-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.core:core:1.12.0] C:\Users\aaddi\.gradle\caches\transforms-3\cdd32d86ab150353e42b32bc666a97d3\transformed\core-1.12.0\AndroidManifest.xml:17:1-30:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\bc08d9234395adecd1292cfc2116d687\transformed\lifecycle-runtime-2.6.2\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\f846ce6ee55d8dbf723d23761995f693\transformed\jetified-lifecycle-viewmodel-compose-2.6.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\e1b3a10d3d366178fd6afdf999bc832e\transformed\jetified-lifecycle-runtime-ktx-2.6.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.5.0] C:\Users\aaddi\.gradle\caches\transforms-3\b9b1946b1ee19183fc41b0c937f79e12\transformed\jetified-runtime-saveable-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.runtime:runtime-android:1.5.0] C:\Users\aaddi\.gradle\caches\transforms-3\762210cf369e7cb9b65e804c90db6b81\transformed\jetified-runtime-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\cbcb52f9f4f6445ba837292ce32f2b4e\transformed\sqlite-framework-2.4.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite:2.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\8b9210ddd115c3857733b2a35cda678d\transformed\sqlite-2.4.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\aaddi\.gradle\caches\transforms-3\9a1369274ad622513d2bdad7569e538e\transformed\jetified-annotation-experimental-1.3.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\aaddi\.gradle\caches\transforms-3\be0d9c06e6e38e55b45055c8f1a1c3bc\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\65408c76ab3c4e3b5bf51aeaed588069\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\aaddi\.gradle\caches\transforms-3\c8377daaf677d1f7bbc4134280383ffb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\aaddi\.gradle\caches\transforms-3\be0d9c06e6e38e55b45055c8f1a1c3bc\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\aaddi\.gradle\caches\transforms-3\a61ae09180b3510c55eecd63f36107b0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\aaddi\.gradle\caches\transforms-3\f674a292ae0dc1ecabc24c50e6e0a51d\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\fd7cbb2fcedb207f107861e6eaeb0576\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:17:1-24:12
 	package
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:2:5-41
-		INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:2:5-41
+		INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:1:11-69
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:1:11-69
 application
-ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:4:5-20:19
-INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:4:5-20:19
+ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:4:5-20:19
+INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:4:5-20:19
+MERGED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:23:5-29:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.5.0] C:\Users\aaddi\.gradle\caches\transforms-3\84bfa0b7caace47bb6a6981842d425ec\transformed\jetified-ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.5.0] C:\Users\aaddi\.gradle\caches\transforms-3\84bfa0b7caace47bb6a6981842d425ec\transformed\jetified-ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.emoji2:emoji2:1.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\5918c6640af00b4589c5b12b5b2bc26d\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:23:5-33:19
@@ -74,39 +81,43 @@ MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\aaddi\.g
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\aaddi\.gradle\caches\transforms-3\f674a292ae0dc1ecabc24c50e6e0a51d\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\aaddi\.gradle\caches\transforms-3\f674a292ae0dc1ecabc24c50e6e0a51d\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
-		INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.12.0] C:\Users\aaddi\.gradle\caches\transforms-3\cdd32d86ab150353e42b32bc666a97d3\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
 	android:label
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:5:9-40
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:5:9-40
 	android:icon
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:6:9-43
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:6:9-43
 	android:theme
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:7:9-72
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:7:9-72
 activity#com.example.workouttracker.ui.WorkoutDetailActivity
-ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:9:9-62
+ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:9:9-62
 	android:name
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:9:19-59
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:9:19-59
 activity#com.example.workouttracker.MainActivity
-ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:11:9-18:20
+ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:11:9-18:20
 	android:exported
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:13:13-36
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:13:13-36
 	android:name
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:12:13-41
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:12:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:14:13-17:29
+ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:14:13-17:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:15:17-69
+ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:15:17-69
 	android:name
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:15:25-66
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:15:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:16:17-77
+ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:16:17-77
 	android:name
-		ADDED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml:16:27-74
+		ADDED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml:16:27-74
 uses-sdk
-INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml
+MERGED from [androidx.room:room-ktx:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\12a8245484957b41260cb9ba76c75823\transformed\jetified-room-ktx-2.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-ktx:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\12a8245484957b41260cb9ba76c75823\transformed\jetified-room-ktx-2.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:21:5-44
 MERGED from [androidx.compose.material3:material3:1.1.2] C:\Users\aaddi\.gradle\caches\transforms-3\0573e0b6eadd4737a938b98350a466a1\transformed\jetified-material3-1.1.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.material3:material3:1.1.2] C:\Users\aaddi\.gradle\caches\transforms-3\0573e0b6eadd4737a938b98350a466a1\transformed\jetified-material3-1.1.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.material:material:1.4.1] C:\Users\aaddi\.gradle\caches\transforms-3\e4c1b56b41981e03c582c2cc3ca07a03\transformed\jetified-material-1.4.1\AndroidManifest.xml:20:5-44
@@ -147,8 +158,10 @@ MERGED from [androidx.activity:activity-compose:1.7.2] C:\Users\aaddi\.gradle\ca
 MERGED from [androidx.activity:activity-compose:1.7.2] C:\Users\aaddi\.gradle\caches\transforms-3\84010a3bd9e5ba333e64c1e1ed9f978e\transformed\jetified-activity-compose-1.7.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity-ktx:1.7.2] C:\Users\aaddi\.gradle\caches\transforms-3\86aa43761f925f8b23a716f9282a0e3a\transformed\jetified-activity-ktx-1.7.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity-ktx:1.7.2] C:\Users\aaddi\.gradle\caches\transforms-3\86aa43761f925f8b23a716f9282a0e3a\transformed\jetified-activity-ktx-1.7.2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\d26a3e617213b4b21579075463a416f9\transformed\jetified-customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\d26a3e617213b4b21579075463a416f9\transformed\jetified-customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\e08d39d646a813e20c59e327198323bf\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\e08d39d646a813e20c59e327198323bf\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\38e14d27a91aa99a759781e063a01aff\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\38e14d27a91aa99a759781e063a01aff\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.emoji2:emoji2:1.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\5918c6640af00b4589c5b12b5b2bc26d\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.emoji2:emoji2:1.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\5918c6640af00b4589c5b12b5b2bc26d\transformed\jetified-emoji2-1.4.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\634e9b7d12ae9c92ee73f96ad50e2165\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:21:5-44
@@ -159,12 +172,10 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2] C:\Users\aaddi\.g
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\5ebb5124c7c1da815815072a0e595166\transformed\jetified-lifecycle-viewmodel-ktx-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\a209e9e0cb971ae71750d8ec1b9e291a\transformed\lifecycle-viewmodel-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\a209e9e0cb971ae71750d8ec1b9e291a\transformed\lifecycle-viewmodel-2.6.2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\e08d39d646a813e20c59e327198323bf\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\e08d39d646a813e20c59e327198323bf\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\38e14d27a91aa99a759781e063a01aff\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\aaddi\.gradle\caches\transforms-3\38e14d27a91aa99a759781e063a01aff\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\9323d7de5dbe8bdc7e70a026a35ad376\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\9323d7de5dbe8bdc7e70a026a35ad376\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\d26a3e617213b4b21579075463a416f9\transformed\jetified-customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\d26a3e617213b4b21579075463a416f9\transformed\jetified-customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
 MERGED from [androidx.core:core-ktx:1.12.0] C:\Users\aaddi\.gradle\caches\transforms-3\34a1e83f3c9f90678bfbc4b29c6d16ca\transformed\jetified-core-ktx-1.12.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.core:core-ktx:1.12.0] C:\Users\aaddi\.gradle\caches\transforms-3\34a1e83f3c9f90678bfbc4b29c6d16ca\transformed\jetified-core-ktx-1.12.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\2b0e0d7d49a6c03cf9cbf62f7f113d73\transformed\jetified-autofill-1.0.0\AndroidManifest.xml:20:5-22:41
@@ -173,20 +184,26 @@ MERGED from [androidx.core:core:1.12.0] C:\Users\aaddi\.gradle\caches\transforms
 MERGED from [androidx.core:core:1.12.0] C:\Users\aaddi\.gradle\caches\transforms-3\cdd32d86ab150353e42b32bc666a97d3\transformed\core-1.12.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\bc08d9234395adecd1292cfc2116d687\transformed\lifecycle-runtime-2.6.2\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\bc08d9234395adecd1292cfc2116d687\transformed\lifecycle-runtime-2.6.2\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\f846ce6ee55d8dbf723d23761995f693\transformed\jetified-lifecycle-viewmodel-compose-2.6.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\f846ce6ee55d8dbf723d23761995f693\transformed\jetified-lifecycle-viewmodel-compose-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\e1b3a10d3d366178fd6afdf999bc832e\transformed\jetified-lifecycle-runtime-ktx-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.6.2] C:\Users\aaddi\.gradle\caches\transforms-3\e1b3a10d3d366178fd6afdf999bc832e\transformed\jetified-lifecycle-runtime-ktx-2.6.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.5.0] C:\Users\aaddi\.gradle\caches\transforms-3\b9b1946b1ee19183fc41b0c937f79e12\transformed\jetified-runtime-saveable-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.5.0] C:\Users\aaddi\.gradle\caches\transforms-3\b9b1946b1ee19183fc41b0c937f79e12\transformed\jetified-runtime-saveable-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-android:1.5.0] C:\Users\aaddi\.gradle\caches\transforms-3\762210cf369e7cb9b65e804c90db6b81\transformed\jetified-runtime-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-android:1.5.0] C:\Users\aaddi\.gradle\caches\transforms-3\762210cf369e7cb9b65e804c90db6b81\transformed\jetified-runtime-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\cbcb52f9f4f6445ba837292ce32f2b4e\transformed\sqlite-framework-2.4.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\cbcb52f9f4f6445ba837292ce32f2b4e\transformed\sqlite-framework-2.4.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\8b9210ddd115c3857733b2a35cda678d\transformed\sqlite-2.4.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] C:\Users\aaddi\.gradle\caches\transforms-3\8b9210ddd115c3857733b2a35cda678d\transformed\sqlite-2.4.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\aaddi\.gradle\caches\transforms-3\9a1369274ad622513d2bdad7569e538e\transformed\jetified-annotation-experimental-1.3.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\aaddi\.gradle\caches\transforms-3\9a1369274ad622513d2bdad7569e538e\transformed\jetified-annotation-experimental-1.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\aaddi\.gradle\caches\transforms-3\be0d9c06e6e38e55b45055c8f1a1c3bc\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\aaddi\.gradle\caches\transforms-3\be0d9c06e6e38e55b45055c8f1a1c3bc\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\65408c76ab3c4e3b5bf51aeaed588069\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\65408c76ab3c4e3b5bf51aeaed588069\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\aaddi\.gradle\caches\transforms-3\c8377daaf677d1f7bbc4134280383ffb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\aaddi\.gradle\caches\transforms-3\c8377daaf677d1f7bbc4134280383ffb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\aaddi\.gradle\caches\transforms-3\be0d9c06e6e38e55b45055c8f1a1c3bc\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\aaddi\.gradle\caches\transforms-3\be0d9c06e6e38e55b45055c8f1a1c3bc\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\aaddi\.gradle\caches\transforms-3\a61ae09180b3510c55eecd63f36107b0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\aaddi\.gradle\caches\transforms-3\a61ae09180b3510c55eecd63f36107b0\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\aaddi\.gradle\caches\transforms-3\f674a292ae0dc1ecabc24c50e6e0a51d\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
@@ -194,9 +211,19 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\aaddi\.gradle\cach
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\fd7cbb2fcedb207f107861e6eaeb0576\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\fd7cbb2fcedb207f107861e6eaeb0576\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
 	android:targetSdkVersion
-		INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\aaddi\OneDrive\Desktop\Workout App\WorkoutTrackerAppV2\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\aaddi\WorkoutTrackerApp\app\src\main\AndroidManifest.xml
+service#androidx.room.MultiInstanceInvalidationService
+ADDED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+	android:exported
+		ADDED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:28:13-60
+	android:directBootAware
+		ADDED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+	android:name
+		ADDED from [androidx.room:room-runtime:2.6.1] C:\Users\aaddi\.gradle\caches\transforms-3\c76a252b315fb09e15dabee7a21a55c5\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
 activity#androidx.compose.ui.tooling.PreviewActivity
 ADDED from [androidx.compose.ui:ui-tooling-android:1.5.0] C:\Users\aaddi\.gradle\caches\transforms-3\84bfa0b7caace47bb6a6981842d425ec\transformed\jetified-ui-tooling-release\AndroidManifest.xml:23:9-25:39
 	android:exported

@@ -2,6 +2,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -32,6 +33,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+    kapt {
+        javacOptions {
+            option("-J--add-exports", "jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED")
+            option("-J--add-opens", "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED")
+        }
+    }
 }
 
 dependencies {
@@ -41,6 +48,9 @@ dependencies {
     implementation "androidx.compose.ui:ui:1.5.0"
     implementation "androidx.compose.material3:material3:1.1.2"
     implementation "androidx.compose.ui:ui-tooling-preview:1.5.0"
-
+    implementation "androidx.room:room-runtime:2.6.1"
+    kapt "androidx.room:room-compiler:2.6.1"
+    implementation "androidx.room:room-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2"
     debugImplementation "androidx.compose.ui:ui-tooling:1.5.0"
 }
