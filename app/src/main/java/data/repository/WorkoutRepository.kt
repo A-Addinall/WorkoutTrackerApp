@@ -1,135 +1,164 @@
 package com.example.workouttracker.data.repository
 
+import androidx.lifecycle.LiveData
 import com.example.workouttracker.data.dao.WorkoutDao
-import com.example.workouttracker.data.database.DatabaseInitializer
 import com.example.workouttracker.data.entity.*
+import com.example.workouttracker.data.database.DatabaseInitializer
 import com.example.workouttracker.logic.WeightSuggestionEngine
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class WorkoutRepository(private val dao: WorkoutDao) {
 
+    // Create instances
     private val weightSuggestionEngine = WeightSuggestionEngine()
+    private val databaseInitializer = DatabaseInitializer()
 
-    /* ────────── ORIGINAL METHODS ────────── */
-    suspend fun initializeDatabase() = withContext(Dispatchers.IO) {
-        DatabaseInitializer.initializeDatabase(dao)
+    // Initialize database when repository is created
+    init {
+        databaseInitializer.initializeDatabase(dao)
     }
 
-    suspend fun getWorkoutTypes() = withContext(Dispatchers.IO) {
-        dao.getAllWorkoutTypes()
-    }
+    // Smart weight suggestion using your WeightSuggestionEngine
+    suspend fun getSuggestedWeight(exerciseId: Int): Double? {
+        return try {
+            // Get exercise details
+            val exercise = dao.getExerciseById(exerciseId)
 
-    suspend fun getExercises(wtId: Int) = withContext(Dispatchers.IO) {
-        dao.getExercisesByWorkoutType(wtId)
-    }
+            // Get recent WorkoutSession data instead of SetTracking
+            val recentSessions = dao.getRecentWorkoutSessions(exerciseId, 10)
 
-    suspend fun lastSession(exId: Int) = withContext(Dispatchers.IO) {
-        dao.getLastSession(exId)
-    }
+            // Convert WorkoutSession to SetTracking format for the engine
+            val recentSets = recentSessions.mapNotNull { session ->
+                session.weight?.let { weight ->
+                    SetTracking(
+                        id = 0,
+                        workoutSessionId = session.id,
+                        exerciseId = session.exerciseId,
+                        setNumber = 1,
+                        targetReps = session.reps,
+                        actualReps = session.reps,
+                        weight = weight,
+                        isSuccessful = true, // Assume successful for now
+                        rpe = 7 // Default RPE value
+                    )
+                }
+            }
 
-    suspend fun logStrength(exId: Int, sets: Int, reps: Int, wt: Double?) =
-        withContext(Dispatchers.IO) {
-            dao.insertWorkoutSession(
-                WorkoutSession(
-                    exerciseId = exId,
-                    date = System.currentTimeMillis(),
-                    sets = sets,
-                    reps = reps,
-                    weight = wt,
-                    time = null
-                )
+            val userSettings = dao.getUserSettings() ?: getDefaultUserSettings()
+
+            weightSuggestionEngine.suggestWeight(
+                exerciseId = exerciseId,
+                exerciseName = exercise?.name ?: "",
+                recentSets = recentSets,
+                userSettings = userSettings
             )
+        } catch (e: Exception) {
+            // Fallback to simple last weight
+            dao.getLastWeightForExercise(exerciseId)
         }
+    }
 
-    suspend fun logMetcon(wtId: Int, sec: Long) = withContext(Dispatchers.IO) {
-        dao.insertWorkoutSession(
-            WorkoutSession(
-                exerciseId = -wtId,
-                date = System.currentTimeMillis(),
-                sets = 0,
-                reps = 0,
-                weight = null,
-                time = sec
-            )
+    private fun getDefaultUserSettings(): UserSettings {
+        return UserSettings(
+            id = 1,
+            darkTheme = false,
+            autoWeightIncrement = 2.5,
+            defaultRestTime = 120,
+            units = "kg"
         )
     }
 
-    /* ────────── NEW PHASE 1 METHODS ────────── */
-
-    // Personal Records
-    suspend fun insertPersonalRecord(pr: PersonalRecord) = withContext(Dispatchers.IO) {
-        dao.insertPersonalRecord(pr)
+    // Rest of your methods remain the same...
+    suspend fun initializeDatabase() {
+        databaseInitializer.initializeDatabase(dao)
     }
 
-    suspend fun getPersonalRecord(exerciseId: Int, type: String) = withContext(Dispatchers.IO) {
-        dao.getPersonalRecord(exerciseId, type)
+    suspend fun getWorkoutTypes(): List<WorkoutType> {
+        return dao.getAllWorkoutTypes()
     }
 
-    suspend fun getPersonalRecordHistory(exerciseId: Int) = withContext(Dispatchers.IO) {
-        dao.getPersonalRecordHistory(exerciseId)
+    suspend fun getExercises(workoutTypeId: Int): List<Exercise> {
+        return dao.getExercisesByWorkoutType(workoutTypeId)
     }
 
-    // User Settings
-    suspend fun getUserSettings() = withContext(Dispatchers.IO) {
-        dao.getUserSettings() ?: UserSettings() // Return default if null
+    suspend fun lastSession(exerciseId: Int): WorkoutSession? {
+        return dao.getLastSession(exerciseId)
     }
 
-    suspend fun updateUserSettings(settings: UserSettings) = withContext(Dispatchers.IO) {
-        dao.updateUserSettings(settings)
+    fun getLastWeightLiveData(exerciseId: Int): LiveData<Double?> {
+        return dao.getLastWeightForExerciseLiveData(exerciseId)
     }
 
-    // Exercise Library
-    suspend fun getActiveExercisesByCategory(category: String) = withContext(Dispatchers.IO) {
-        dao.getActiveExercisesByCategory(category)
+    suspend fun logStrength(exerciseId: Int, sets: Int, reps: Int, weight: Double?, notes: String? = null): Long {
+        val session = WorkoutSession(
+            exerciseId = exerciseId,
+            date = System.currentTimeMillis(),
+            sets = sets,
+            reps = reps,
+            weight = weight,
+            time = null,
+            notes = notes
+        )
+        return dao.insertWorkoutSession(session)
     }
 
-    suspend fun getAllActiveExercises() = withContext(Dispatchers.IO) {
-        dao.getAllActiveExercises()
+    suspend fun logMetcon(exerciseId: Int, timeInSeconds: Long, notes: String? = null): Long {
+        val session = WorkoutSession(
+            exerciseId = exerciseId,
+            date = System.currentTimeMillis(),
+            sets = 1,
+            reps = 0,
+            weight = null,
+            time = timeInSeconds,
+            notes = notes
+        )
+        return dao.insertWorkoutSession(session)
     }
 
-    suspend fun updateExerciseLibrary(exercise: ExerciseLibrary) = withContext(Dispatchers.IO) {
-        dao.updateExerciseLibrary(exercise)
+    suspend fun getLastMetconTime(exerciseId: Int): Long? {
+        return dao.getLastMetconTime(exerciseId)
     }
 
-    // Weight Suggestions - now needs exercise name for specific logic
-    suspend fun getSuggestedWeight(exerciseId: Int): Double = withContext(Dispatchers.IO) {
-        val exercise = dao.getExercisesByWorkoutType(1).find { it.id == exerciseId }
-            ?: dao.getExercisesByWorkoutType(2).find { it.id == exerciseId }
-            ?: dao.getExercisesByWorkoutType(3).find { it.id == exerciseId }
-
-        val exerciseName = exercise?.name ?: "Unknown Exercise"
-        val recentSets = dao.getRecentSets(exerciseId, 6)
-        val userSettings = getUserSettings()
-
-        weightSuggestionEngine.suggestWeight(exerciseId, exerciseName, recentSets, userSettings)
+    fun getLastMetconTimeLiveData(exerciseId: Int): LiveData<Long> {
+        return dao.getLastMetconTimeLiveData(exerciseId)
     }
 
-    // Set Tracking
-    suspend fun insertSetTracking(setTracking: SetTracking) = withContext(Dispatchers.IO) {
+    suspend fun insertWorkoutSession(session: WorkoutSession): Long {
+        return dao.insertWorkoutSession(session)
+    }
+
+    suspend fun insertSetTracking(setTracking: SetTracking) {
         dao.insertSetTracking(setTracking)
     }
 
-    suspend fun getRecentSets(exerciseId: Int, limit: Int = 6) = withContext(Dispatchers.IO) {
-        dao.getRecentSets(exerciseId, limit)
+    suspend fun getRecentSets(exerciseId: Int, limit: Int): List<SetTracking> {
+        return dao.getRecentSets(exerciseId, limit)
     }
 
-    suspend fun getSetsForSession(sessionId: Int) = withContext(Dispatchers.IO) {
-        dao.getSetsForSession(sessionId)
+    suspend fun insertPersonalRecord(personalRecord: PersonalRecord) {
+        dao.insertPersonalRecord(personalRecord)
     }
 
-    // Helper method to update personal records after logging sets
-    suspend fun checkAndUpdatePersonalRecord(exerciseId: Int, weight: Double) = withContext(Dispatchers.IO) {
-        val currentPR = dao.getPersonalRecord(exerciseId, "weight")
-        if (currentPR == null || weight > currentPR.value) {
-            dao.insertPersonalRecord(
-                PersonalRecord(
-                    exerciseId = exerciseId,
-                    recordType = "weight",
-                    value = weight,
-                    date = System.currentTimeMillis()
-                )
-            )
-        }
+    suspend fun getPersonalRecord(exerciseId: Int, type: String): PersonalRecord? {
+        return dao.getPersonalRecord(exerciseId, type)
+    }
+
+    suspend fun getUserSettings(): UserSettings? {
+        return dao.getUserSettings()
+    }
+
+    suspend fun insertUserSettings(userSettings: UserSettings) {
+        dao.insertUserSettings(userSettings)
+    }
+
+    suspend fun updateUserSettings(userSettings: UserSettings) {
+        dao.updateUserSettings(userSettings)
+    }
+
+    suspend fun getActiveExercisesByCategory(category: String): List<ExerciseLibrary> {
+        return dao.getActiveExercisesByCategory(category)
+    }
+
+    suspend fun getAllActiveExercises(): List<ExerciseLibrary> {
+        return dao.getAllActiveExercises()
     }
 }

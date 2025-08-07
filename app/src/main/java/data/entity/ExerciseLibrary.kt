@@ -10,7 +10,7 @@ data class ExerciseLibrary(
     val category: String, // "Strength", "Metcon", "Accessory"
     val muscleGroups: String, // JSON array: ["chest", "shoulders"]
     val equipment: String, // "barbell", "dumbbell", "bodyweight", etc.
-    val difficulty: Int, // 1-5
+    val difficulty: String, // 1-5
     val instructions: String? = null,
     val isActive: Boolean = true,
     val isDefault: Boolean = false // true for pre-populated exercises

@@ -6,7 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "exercises",
+    tableName = "exercise",
     indices = [Index(value = ["workoutTypeId"])],  // Add this line
     foreignKeys = [ForeignKey(
         entity = WorkoutType::class,

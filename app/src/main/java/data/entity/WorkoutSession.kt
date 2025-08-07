@@ -3,7 +3,7 @@ package com.example.workouttracker.data.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "workout_sessions")
+@Entity(tableName = "workout_session")
 data class WorkoutSession(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val exerciseId: Int,
