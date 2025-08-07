@@ -6,9 +6,11 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.workouttracker.R
 import com.example.workouttracker.WorkoutApplication
 import com.example.workouttracker.data.entity.Exercise
+import com.example.workouttracker.data.repository.WorkoutRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +32,21 @@ class WorkoutActivity : AppCompatActivity() {
 
         workoutTypeId = intent.getIntExtra("WORKOUT_TYPE_ID", 1)
         workoutName = intent.getStringExtra("WORKOUT_NAME") ?: "Workout"
+
+        // ADD THE DEBUG CODE HERE:
+        lifecycleScope.launch {
+            val repository = (application as WorkoutApplication).repository
+            val dayAExercises = repository.getExercises(1) // Day A
+            println("DEBUG: Day A total exercises: ${dayAExercises.size}")
+
+            dayAExercises.forEach { exercise ->
+                println("DEBUG: Exercise: ${exercise.name} | Category: ${exercise.category} | ID: ${exercise.id}")
+            }
+
+            // Check for actual duplicates
+            val duplicates = dayAExercises.groupBy { it.name }.filter { it.value.size > 1 }
+            println("DEBUG: Duplicate exercise names: ${duplicates.keys}")
+        }
 
         initViews()
         setupObservers()
@@ -110,7 +127,6 @@ class WorkoutActivity : AppCompatActivity() {
         layoutExercises.addView(cardView)
     }
 
-
     private fun addMetconCard(exercises: List<Exercise>) {
         val cardView = layoutInflater.inflate(R.layout.item_metcon_card, layoutExercises, false)
 
@@ -139,7 +155,7 @@ class WorkoutActivity : AppCompatActivity() {
         cardView.setOnClickListener {
             startMetconActivity()
         }
-        
+
         layoutExercises.addView(cardView)
     }
 

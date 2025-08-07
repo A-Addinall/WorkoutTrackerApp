@@ -8,14 +8,15 @@ import com.example.workouttracker.logic.WeightSuggestionEngine
 
 class WorkoutRepository(private val dao: WorkoutDao) {
 
-    // Create instances
-    private val weightSuggestionEngine = WeightSuggestionEngine()
-    private val databaseInitializer = DatabaseInitializer()
+    // Remove this initialization:
+    // private val databaseInitializer = DatabaseInitializer()
+    // init {
+    //     databaseInitializer.initializeDatabase(dao)
+    // }
 
-    // Initialize database when repository is created
-    init {
-        databaseInitializer.initializeDatabase(dao)
-    }
+    // Keep everything else the same...
+    private val weightSuggestionEngine = WeightSuggestionEngine()
+
 
     // Smart weight suggestion using your WeightSuggestionEngine
     suspend fun getSuggestedWeight(exerciseId: Int): Double? {
@@ -65,11 +66,6 @@ class WorkoutRepository(private val dao: WorkoutDao) {
             defaultRestTime = 120,
             units = "kg"
         )
-    }
-
-    // Rest of your methods remain the same...
-    suspend fun initializeDatabase() {
-        databaseInitializer.initializeDatabase(dao)
     }
 
     suspend fun getWorkoutTypes(): List<WorkoutType> {

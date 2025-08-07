@@ -12,38 +12,56 @@ class DatabaseInitializer {
             val workoutTypeCount = dao.getWorkoutTypeCount()
             if (workoutTypeCount == 0) {
                 val workoutTypes = listOf(
-                    WorkoutType(1, "Day A", "Upper body strength training"),
-                    WorkoutType(2, "Day B", "Lower body strength training"),
-                    WorkoutType(3, "Day C", "Full body and conditioning")
+                    WorkoutType(1, "Day 1", "Upper body strength training"),
+                    WorkoutType(2, "Day 2", "Lower body strength training"),
+                    WorkoutType(3, "Day 3", "Full body and conditioning")
                 )
                 workoutTypes.forEach { workoutType ->
                     dao.insertWorkoutType(workoutType)
                 }
             }
 
-            // Initialize Exercises for each workout type
+// Updated exercise list with distinct names:
             val exercisesList = listOf(
-                // Day A Exercises
-                Exercise(0, 1, "Bench Press", "Strength", "3-5 reps", "Chest compound movement"),
-                Exercise(0, 1, "Overhead Press", "Strength", "3-5 reps", "Shoulder compound movement"),
-                Exercise(0, 1, "Barbell Rows", "Strength", "3-5 reps", "Back compound movement"),
-                Exercise(0, 1, "Dips", "Strength", "8-12 reps", "Triceps accessory"),
-                Exercise(0, 1, "Chin-ups", "Strength", "5-10 reps", "Back accessory"),
+                // Day A exercises
+                Exercise(0, 1, "Barbell Bench Press", "Strength", "5-8 reps"),
+                Exercise(0, 1, "Overhead Press - Barbell", "Strength", "5-8 reps"),
+                Exercise(0, 1, "Dumbbell Incline Press", "Strength", "8-12 reps"),
+                Exercise(0, 1, "Lateral Raise", "Strength", "12-15 reps"),
+                Exercise(0, 1, "Close-Grip Bench Press", "Strength", "6-10 reps"),
+                Exercise(0, 1, "Wall Walks - Strength", "Strength", "3-5 reps or 30-60s"), // ← RENAMED
+                Exercise(0, 1, "Assault Bike", "Metcon", "20/15 cal"),
+                Exercise(0, 1, "Wall Walks - Metcon", "Metcon", "4 reps"), // ← RENAMED
+                Exercise(0, 1, "Kettlebell Swings (Russian)", "Metcon", "16 reps"),
+                Exercise(0, 1, "Dumbbell Push Press", "Metcon", "10 reps each arm"),
 
-                // Day B Exercises
-                Exercise(0, 2, "Squat", "Strength", "3-5 reps", "Leg compound movement"),
-                Exercise(0, 2, "Deadlift", "Strength", "1-5 reps", "Posterior chain compound"),
-                Exercise(0, 2, "Romanian Deadlift", "Strength", "8-12 reps", "Hamstring accessory"),
-                Exercise(0, 2, "Bulgarian Split Squat", "Strength", "8-12 reps", "Unilateral leg work"),
-                Exercise(0, 2, "Walking Lunges", "Strength", "10-15 reps", "Leg accessory"),
+                // Day B exercises (no changes needed)
+                Exercise(0, 2, "Barbell Row", "Strength", "6-10 reps"),
+                Exercise(0, 2, "Pull-ups/Chin-ups", "Strength", "6-10 reps or AMRAP"),
+                Exercise(0, 2, "One-arm Dumbbell Row", "Strength", "8-12 reps"),
+                Exercise(0, 2, "Barbell or Dumbbell Curl", "Strength", "10-15 reps"),
+                Exercise(0, 2, "Face Pulls", "Strength", "12-20 reps"),
+                Exercise(0, 2, "400m Run", "Metcon", "400m or 0.5km bike"),
+                Exercise(0, 2, "One-arm KB Rows", "Metcon", "12 reps each side"),
+                Exercise(0, 2, "KB Swings (full)", "Metcon", "16 reps"),
+                Exercise(0, 2, "Burpees", "Metcon", "10 reps"),
+                Exercise(0, 2, "Plank", "Metcon", "30s"),
 
-                // Day C Exercises
-                Exercise(0, 3, "Thrusters", "Metcon", "AMRAP", "Full body conditioning"),
-                Exercise(0, 3, "Burpees", "Metcon", "AMRAP", "Full body cardio"),
-                Exercise(0, 3, "Kettlebell Swings", "Metcon", "EMOM", "Hip hinge conditioning"),
-                Exercise(0, 3, "Mountain Climbers", "Metcon", "Tabata", "Core conditioning"),
-                Exercise(0, 3, "Push-up to T", "Metcon", "AMRAP", "Upper body conditioning")
+                // Day C exercises
+                Exercise(0, 3, "Barbell Back Squat", "Strength", "5-8 reps"),
+                Exercise(0, 3, "Romanian Deadlift", "Strength", "6-10 reps"),
+                Exercise(0, 3, "Bulgarian Split Squat", "Strength", "8-12 reps"),
+                Exercise(0, 3, "Calf Raise", "Strength", "12-20 reps"),
+                Exercise(0, 3, "Ab Wheel/Plank", "Strength", "8-10 reps or 30-60s"),
+                Exercise(0, 3, "Landmine Press", "Strength", "6-10 reps"),
+                Exercise(0, 3, "Landmine Rotations - Strength", "Strength", "10-15 reps per side"), // ← RENAMED
+                Exercise(0, 3, "Landmine Rotations - Metcon", "Metcon", "10 reps each side"), // ← RENAMED
+                Exercise(0, 3, "Walking Lunges", "Metcon", "20m"),
+                Exercise(0, 3, "KB Goblet Squats", "Metcon", "12 reps"),
+                Exercise(0, 3, "V-ups or Ab Wheel Rollouts", "Metcon", "10 reps"),
+                Exercise(0, 3, "Assault Bike Sprint", "Metcon", "250m")
             )
+
 
             dao.insertExercises(exercisesList)
 
