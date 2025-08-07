@@ -16,22 +16,50 @@
 
     <application
         android:name="com.example.workouttracker.WorkoutApplication"
+        android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:debuggable="true"
         android:extractNativeLibs="true"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="S.A.Fitness"
-        android:theme="@style/Theme.Material3.Light.NoActionBar" >
-        <activity android:name="com.example.workouttracker.ui.WorkoutDetailActivity" />
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/Theme.WorkoutTracker" >
+
+        <!-- Main Landing Page Activity -->
         <activity
             android:name="com.example.workouttracker.MainActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/Theme.WorkoutTracker" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Phase 2 New Activities -->
+        <activity
+            android:name="com.example.workouttracker.ui.WorkoutActivity"
+            android:parentActivityName="com.example.workouttracker.MainActivity" />
+        <activity
+            android:name="com.example.workouttracker.ui.ExerciseDetailActivity"
+            android:parentActivityName="com.example.workouttracker.ui.WorkoutActivity" />
+        <activity
+            android:name="com.example.workouttracker.ui.ExerciseLibraryActivity"
+            android:parentActivityName="com.example.workouttracker.MainActivity" />
+        <activity
+            android:name="com.example.workouttracker.ui.PersonalRecordsActivity"
+            android:parentActivityName="com.example.workouttracker.MainActivity" />
+        <activity
+            android:name="com.example.workouttracker.ui.SettingsActivity"
+            android:parentActivityName="com.example.workouttracker.MainActivity" />
+        <activity
+            android:name="com.example.workouttracker.ui.MetconActivity"
+            android:parentActivityName="com.example.workouttracker.ui.WorkoutActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

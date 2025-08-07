@@ -5,13 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.workouttracker.data.dao.WorkoutDao
-import com.example.workouttracker.data.entity.Exercise
-import com.example.workouttracker.data.entity.WorkoutSession
-import com.example.workouttracker.data.entity.WorkoutType
+import com.example.workouttracker.data.entity.*
 
 @Database(
-    entities = [WorkoutType::class, Exercise::class, WorkoutSession::class],
-    version = 3,  // Changed from 1 to 2
+    entities = [
+        WorkoutType::class,
+        Exercise::class,
+        WorkoutSession::class,
+        PersonalRecord::class,
+        UserSettings::class,
+        ExerciseLibrary::class,
+        SetTracking::class
+    ],
+    version = 5, // Increment from previous version
     exportSchema = false
 )
 abstract class WorkoutDatabase : RoomDatabase() {
@@ -28,7 +34,7 @@ abstract class WorkoutDatabase : RoomDatabase() {
                     WorkoutDatabase::class.java,
                     "workout_database"
                 )
-                    .fallbackToDestructiveMigration()  // Add this line
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 instance
