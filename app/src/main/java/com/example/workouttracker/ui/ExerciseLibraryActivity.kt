@@ -1,0 +1,23 @@
+package com.example.workouttracker.ui
+
+import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.example.workouttracker.R
+
+class ExerciseLibraryActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_placeholder)
+
+        findViewById<TextView>(R.id.tvTitle).text = "Exercise Library"
+
+        findViewById<ImageView>(R.id.ivBack).setOnClickListener {
+            finish()
+        }
+
+        // TODO: Phase 3 - Implement exercise library functionality
+    }
+}
