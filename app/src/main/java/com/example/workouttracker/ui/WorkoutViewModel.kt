@@ -14,7 +14,6 @@ class WorkoutViewModel(private val repo: WorkoutRepository) : ViewModel() {
 
     init {
         viewModelScope.launch {
-            repo.initializeDatabase()
             workoutTypes.value = repo.getWorkoutTypes() } }
 
     fun loadWorkout(wtId: Int) = viewModelScope.launch {

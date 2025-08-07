@@ -1,7 +1,7 @@
 package com.example.workouttracker.data.database;
 
 @kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000\u0014\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\b\'\u0018\u0000 \u00052\u00020\u0001:\u0001\u0005B\u0005\u00a2\u0006\u0002\u0010\u0002J\b\u0010\u0003\u001a\u00020\u0004H&\u00a8\u0006\u0006"}, d2 = {"Lcom/example/workouttracker/data/database/WorkoutDatabase;", "Landroidx/room/RoomDatabase;", "()V", "workoutDao", "Lcom/example/workouttracker/data/dao/WorkoutDao;", "Companion", "app_debug"})
-@androidx.room.Database(entities = {com.example.workouttracker.data.entity.WorkoutType.class, com.example.workouttracker.data.entity.Exercise.class, com.example.workouttracker.data.entity.WorkoutSession.class, com.example.workouttracker.data.entity.PersonalRecord.class, com.example.workouttracker.data.entity.UserSettings.class, com.example.workouttracker.data.entity.ExerciseLibrary.class, com.example.workouttracker.data.entity.SetTracking.class}, version = 7, exportSchema = false)
+@androidx.room.Database(entities = {com.example.workouttracker.data.entity.WorkoutType.class, com.example.workouttracker.data.entity.Exercise.class, com.example.workouttracker.data.entity.WorkoutSession.class, com.example.workouttracker.data.entity.PersonalRecord.class, com.example.workouttracker.data.entity.UserSettings.class, com.example.workouttracker.data.entity.ExerciseLibrary.class, com.example.workouttracker.data.entity.SetTracking.class}, version = 9, exportSchema = false)
 public abstract class WorkoutDatabase extends androidx.room.RoomDatabase {
     @kotlin.jvm.Volatile
     @org.jetbrains.annotations.Nullable
