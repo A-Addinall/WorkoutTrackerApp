@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/activity_workout.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/activity_workout.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/activity_metcon.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/activity_metcon.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/item_exercise_card.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/item_exercise_card.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/item_metcon_exercise.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/item_metcon_exercise.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/item_metcon_card.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/item_metcon_card.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/activity_workout_detail.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/activity_workout_detail.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/item_set_entry.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/item_set_entry.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/activity_placeholder.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/activity_placeholder.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/activity_main.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.workouttracker.app-mergeDebugResources-41:/layout/activity_exercise_detail.xml",
+        "source": "com.example.workouttracker.app-main-44:/layout/activity_exercise_detail.xml"
+    }
+]

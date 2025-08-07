@@ -17,7 +17,7 @@ import com.example.workouttracker.data.entity.*
         ExerciseLibrary::class,
         SetTracking::class
     ],
-    version = 5, // Increment from previous version
+    version = 7, // Increment from previous version
     exportSchema = false
 )
 abstract class WorkoutDatabase : RoomDatabase() {

@@ -9,6 +9,9 @@ import androidx.lifecycle.Observer
 import com.example.workouttracker.R
 import com.example.workouttracker.WorkoutApplication
 import com.example.workouttracker.data.entity.Exercise
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
 
 class WorkoutActivity : AppCompatActivity() {
 
@@ -90,9 +93,14 @@ class WorkoutActivity : AppCompatActivity() {
         tvExerciseName.text = exercise.name
         tvRepRange.text = exercise.repRange
 
-        workoutViewModel.lastWeights.observe(this) { lastWeights ->
-            val lastWeight = lastWeights?.get(exercise.id)
-            tvLastWeight.text = if (lastWeight != null) "Last: ${lastWeight}kg" else "No previous data"
+        // Get last weight from database
+        CoroutineScope(Dispatchers.Main).launch {
+            val lastSession = (application as WorkoutApplication).repository.lastSession(exercise.id)
+            tvLastWeight.text = if (lastSession?.weight != null && lastSession.weight > 0) {
+                "Last: ${lastSession.weight}kg"
+            } else {
+                "No previous data"
+            }
         }
 
         cardView.setOnClickListener {
@@ -101,6 +109,7 @@ class WorkoutActivity : AppCompatActivity() {
 
         layoutExercises.addView(cardView)
     }
+
 
     private fun addMetconCard(exercises: List<Exercise>) {
         val cardView = layoutInflater.inflate(R.layout.item_metcon_card, layoutExercises, false)
