@@ -193,5 +193,35 @@ class WorkoutRepository(private val dao: WorkoutDao) {
             .sortedByDescending { it.date }
             .take(limit)
     }
+    // Add this improved method to your WorkoutRepository class
+    suspend fun removeDuplicateExercises(workoutTypeId: Int) {
+        val exercises = dao.getExercisesByWorkoutType(workoutTypeId)
+        val duplicates = exercises.groupBy { it.name }.filter { it.value.size > 1 }
+
+        if (duplicates.isNotEmpty()) {
+            println("DEBUG: Found ${duplicates.size} duplicate exercise groups")
+
+            duplicates.forEach { (name, duplicateExercises) ->
+                // Keep the one with the lowest ID (first inserted)
+                val toKeep = duplicateExercises.minByOrNull { it.id }
+
+                if (toKeep != null) {
+                    // Use the new DAO method to remove duplicates
+                    dao.removeDuplicateExercisesByName(workoutTypeId, name, toKeep.id)
+                    println("DEBUG: Removed duplicates for '$name', kept ID: ${toKeep.id}")
+                }
+            }
+        }
+    }
+    // Add this method to WorkoutRepository to safely insert exercises
+    suspend fun insertExerciseSafely(exercise: Exercise) {
+        val existing = dao.getExerciseByName(exercise.workoutTypeId, exercise.name)
+        if (existing == null) {
+            dao.insertExercise(exercise)
+            println("DEBUG: Inserted new exercise: ${exercise.name}")
+        } else {
+            println("DEBUG: Exercise '${exercise.name}' already exists, skipping insertion")
+        }
+    }
 
 }

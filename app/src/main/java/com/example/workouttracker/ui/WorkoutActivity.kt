@@ -33,19 +33,19 @@ class WorkoutActivity : AppCompatActivity() {
         workoutTypeId = intent.getIntExtra("WORKOUT_TYPE_ID", 1)
         workoutName = intent.getStringExtra("WORKOUT_NAME") ?: "Workout"
 
-        // ADD THE DEBUG CODE HERE:
+        // Debug code to check for duplicates
         lifecycleScope.launch {
             val repository = (application as WorkoutApplication).repository
-            val dayAExercises = repository.getExercises(1) // Day A
-
-            // Check for actual duplicates
+            val dayAExercises = repository.getExercises(workoutTypeId) // Use workoutTypeId instead of hardcoded 1
             val duplicates = dayAExercises.groupBy { it.name }.filter { it.value.size > 1 }
             println("DEBUG: Duplicate exercise names: ${duplicates.keys}")
+
+            // Clean up duplicates if they exist (you'll need to add this method to repository first)
+            repository.removeDuplicateExercises(workoutTypeId)
         }
 
         initViews()
         setupObservers()
-
         workoutViewModel.loadWorkout(workoutTypeId)
     }
 

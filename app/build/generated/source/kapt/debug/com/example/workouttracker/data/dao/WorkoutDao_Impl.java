@@ -10,6 +10,7 @@ import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
+import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
@@ -54,9 +55,15 @@ public final class WorkoutDao_Impl implements WorkoutDao {
 
   private final EntityInsertionAdapter<ExerciseLibrary> __insertionAdapterOfExerciseLibrary;
 
+  private final EntityDeletionOrUpdateAdapter<Exercise> __deletionAdapterOfExercise;
+
   private final EntityDeletionOrUpdateAdapter<UserSettings> __updateAdapterOfUserSettings;
 
   private final EntityDeletionOrUpdateAdapter<ExerciseLibrary> __updateAdapterOfExerciseLibrary;
+
+  private final SharedSQLiteStatement __preparedStmtOfDeleteExerciseById;
+
+  private final SharedSQLiteStatement __preparedStmtOfRemoveDuplicateExercisesByName;
 
   public WorkoutDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
@@ -272,6 +279,19 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         statement.bindLong(9, _tmp_1);
       }
     };
+    this.__deletionAdapterOfExercise = new EntityDeletionOrUpdateAdapter<Exercise>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "DELETE FROM `exercise` WHERE `id` = ?";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final Exercise entity) {
+        statement.bindLong(1, entity.getId());
+      }
+    };
     this.__updateAdapterOfUserSettings = new EntityDeletionOrUpdateAdapter<UserSettings>(__db) {
       @Override
       @NonNull
@@ -343,6 +363,22 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         final int _tmp_1 = entity.isDefault() ? 1 : 0;
         statement.bindLong(9, _tmp_1);
         statement.bindLong(10, entity.getId());
+      }
+    };
+    this.__preparedStmtOfDeleteExerciseById = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "DELETE FROM exercise WHERE id = ?";
+        return _query;
+      }
+    };
+    this.__preparedStmtOfRemoveDuplicateExercisesByName = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "DELETE FROM exercise WHERE workoutTypeId = ? AND name = ? AND id != ?";
+        return _query;
       }
     };
   }
@@ -500,6 +536,25 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   }
 
   @Override
+  public Object deleteExercise(final Exercise exercise,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __deletionAdapterOfExercise.handle(exercise);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
   public Object updateUserSettings(final UserSettings userSettings,
       final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
@@ -532,6 +587,66 @@ public final class WorkoutDao_Impl implements WorkoutDao {
           return Unit.INSTANCE;
         } finally {
           __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object deleteExerciseById(final int exerciseId,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteExerciseById.acquire();
+        int _argIndex = 1;
+        _stmt.bindLong(_argIndex, exerciseId);
+        try {
+          __db.beginTransaction();
+          try {
+            _stmt.executeUpdateDelete();
+            __db.setTransactionSuccessful();
+            return Unit.INSTANCE;
+          } finally {
+            __db.endTransaction();
+          }
+        } finally {
+          __preparedStmtOfDeleteExerciseById.release(_stmt);
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object removeDuplicateExercisesByName(final int workoutTypeId, final String exerciseName,
+      final int keepId, final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        final SupportSQLiteStatement _stmt = __preparedStmtOfRemoveDuplicateExercisesByName.acquire();
+        int _argIndex = 1;
+        _stmt.bindLong(_argIndex, workoutTypeId);
+        _argIndex = 2;
+        if (exerciseName == null) {
+          _stmt.bindNull(_argIndex);
+        } else {
+          _stmt.bindString(_argIndex, exerciseName);
+        }
+        _argIndex = 3;
+        _stmt.bindLong(_argIndex, keepId);
+        try {
+          __db.beginTransaction();
+          try {
+            _stmt.executeUpdateDelete();
+            __db.setTransactionSuccessful();
+            return Unit.INSTANCE;
+          } finally {
+            __db.endTransaction();
+          }
+        } finally {
+          __preparedStmtOfRemoveDuplicateExercisesByName.release(_stmt);
         }
       }
     }, $completion);
@@ -578,6 +693,26 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         }
       }
     }, $completion);
+  }
+
+  @Override
+  public int getWorkoutTypeCountSync() {
+    final String _sql = "SELECT COUNT(*) FROM workout_type";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _result;
+      if (_cursor.moveToFirst()) {
+        _result = _cursor.getInt(0);
+      } else {
+        _result = 0;
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
   }
 
   @Override
@@ -1598,6 +1733,75 @@ public final class WorkoutDao_Impl implements WorkoutDao {
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, exerciseId);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<Exercise>() {
+      @Override
+      @Nullable
+      public Exercise call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfWorkoutTypeId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutTypeId");
+          final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
+          final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfRepRange = CursorUtil.getColumnIndexOrThrow(_cursor, "repRange");
+          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
+          final Exercise _result;
+          if (_cursor.moveToFirst()) {
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final int _tmpWorkoutTypeId;
+            _tmpWorkoutTypeId = _cursor.getInt(_cursorIndexOfWorkoutTypeId);
+            final String _tmpName;
+            if (_cursor.isNull(_cursorIndexOfName)) {
+              _tmpName = null;
+            } else {
+              _tmpName = _cursor.getString(_cursorIndexOfName);
+            }
+            final String _tmpCategory;
+            if (_cursor.isNull(_cursorIndexOfCategory)) {
+              _tmpCategory = null;
+            } else {
+              _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
+            }
+            final String _tmpRepRange;
+            if (_cursor.isNull(_cursorIndexOfRepRange)) {
+              _tmpRepRange = null;
+            } else {
+              _tmpRepRange = _cursor.getString(_cursorIndexOfRepRange);
+            }
+            final String _tmpDescription;
+            if (_cursor.isNull(_cursorIndexOfDescription)) {
+              _tmpDescription = null;
+            } else {
+              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+            }
+            _result = new Exercise(_tmpId,_tmpWorkoutTypeId,_tmpName,_tmpCategory,_tmpRepRange,_tmpDescription);
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object getExerciseByName(final int workoutTypeId, final String exerciseName,
+      final Continuation<? super Exercise> $completion) {
+    final String _sql = "SELECT * FROM exercise WHERE workoutTypeId = ? AND name = ? LIMIT 1";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, workoutTypeId);
+    _argIndex = 2;
+    if (exerciseName == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, exerciseName);
+    }
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
     return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<Exercise>() {
       @Override

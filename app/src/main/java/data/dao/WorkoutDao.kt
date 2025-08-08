@@ -12,6 +12,9 @@ interface WorkoutDao {
     suspend fun getAllWorkoutTypes(): List<WorkoutType>
 
     @Query("SELECT COUNT(*) FROM workout_type")
+    fun getWorkoutTypeCountSync(): Int
+
+    @Query("SELECT COUNT(*) FROM workout_type")
     suspend fun getWorkoutTypeCount(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -118,4 +121,15 @@ interface WorkoutDao {
 
     @Query("SELECT * FROM exercise WHERE id = :exerciseId LIMIT 1")
     suspend fun getExerciseById(exerciseId: Int): Exercise?
+    @Delete
+    suspend fun deleteExercise(exercise: Exercise)
+
+    @Query("DELETE FROM exercise WHERE id = :exerciseId")
+    suspend fun deleteExerciseById(exerciseId: Int)
+
+    @Query("SELECT * FROM exercise WHERE workoutTypeId = :workoutTypeId AND name = :exerciseName LIMIT 1")
+    suspend fun getExerciseByName(workoutTypeId: Int, exerciseName: String): Exercise?
+
+    @Query("DELETE FROM exercise WHERE workoutTypeId = :workoutTypeId AND name = :exerciseName AND id != :keepId")
+    suspend fun removeDuplicateExercisesByName(workoutTypeId: Int, exerciseName: String, keepId: Int)
 }

@@ -12,10 +12,18 @@ class WorkoutApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // Initialize database only once when app starts
+        // Use the non-suspend version - no coroutines needed!
         Thread {
-            val databaseInitializer = DatabaseInitializer()
-            databaseInitializer.initializeDatabase(database.workoutDao())
+            val dao = database.workoutDao()
+            val existingWorkoutTypes = dao.getWorkoutTypeCountSync()
+
+            if (existingWorkoutTypes == 0) {
+                println("DEBUG: Database empty, initializing...")
+                val databaseInitializer = DatabaseInitializer()
+                databaseInitializer.initializeDatabase(dao)
+            } else {
+                println("DEBUG: Database already has $existingWorkoutTypes workout types, skipping initialization")
+            }
         }.start()
     }
 }
