@@ -26,6 +26,7 @@ id cardDayC
 id cardExerciseLibrary
 id cardPersonalRecords
 id cardSettings
+id chartWeightProgression
 id etNotes
 id etReps
 id etRestTime
@@ -40,6 +41,7 @@ id layoutProgressSummary
 id layoutRecentPRs
 id layoutSets
 id scrollExercises
+id spinnerExerciseSelection
 id spinnerUnits
 id switchDarkTheme
 id switchShowPR
@@ -63,8 +65,10 @@ id tvTitle
 id tvTotalPRs
 id tvTotalVolume
 id tvTotalWorkouts
+id tvVolumeIncrease
 id tvWorkoutTitle
 layout activity_analytics
+layout activity_analytics_enhanced
 layout activity_exercise_detail
 layout activity_main
 layout activity_metcon
@@ -72,6 +76,7 @@ layout activity_placeholder
 layout activity_settings
 layout activity_workout
 layout activity_workout_detail
+layout item_enhanced_progress_card
 layout item_exercise_card
 layout item_metcon_card
 layout item_metcon_exercise

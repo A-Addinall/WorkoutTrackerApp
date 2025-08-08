@@ -43,6 +43,7 @@ MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] C:\Users\aaddi\.gradle\
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] C:\Users\aaddi\.gradle\caches\transforms-3\333d277907a6c3313954c535302abf9b\transformed\lifecycle-viewmodel-2.7.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-ktx:2.7.0] C:\Users\aaddi\.gradle\caches\transforms-3\41ffcc1a631152b8205a6feb2c9fdf23\transformed\jetified-lifecycle-livedata-ktx-2.7.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] C:\Users\aaddi\.gradle\caches\transforms-3\687ba268e28ce849c10e29dc76036ae2\transformed\jetified-lifecycle-viewmodel-ktx-2.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] C:\Users\aaddi\.gradle\caches\transforms-3\3590bccbe96b996fd344f22ddcf649b2\transformed\jetified-MPAndroidChart-v3.1.0\AndroidManifest.xml:2:1-20:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\8f203123dd5e8f2721f8f4b847a39b43\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\d5f29026791560de07584b4a4574c1b4\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\aaddi\.gradle\caches\transforms-3\be0d9c06e6e38e55b45055c8f1a1c3bc\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
@@ -255,6 +256,8 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-ktx:2.7.0] C:\Users\aaddi\.gr
 MERGED from [androidx.lifecycle:lifecycle-livedata-ktx:2.7.0] C:\Users\aaddi\.gradle\caches\transforms-3\41ffcc1a631152b8205a6feb2c9fdf23\transformed\jetified-lifecycle-livedata-ktx-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] C:\Users\aaddi\.gradle\caches\transforms-3\687ba268e28ce849c10e29dc76036ae2\transformed\jetified-lifecycle-viewmodel-ktx-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] C:\Users\aaddi\.gradle\caches\transforms-3\687ba268e28ce849c10e29dc76036ae2\transformed\jetified-lifecycle-viewmodel-ktx-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] C:\Users\aaddi\.gradle\caches\transforms-3\3590bccbe96b996fd344f22ddcf649b2\transformed\jetified-MPAndroidChart-v3.1.0\AndroidManifest.xml:16:5-18:41
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] C:\Users\aaddi\.gradle\caches\transforms-3\3590bccbe96b996fd344f22ddcf649b2\transformed\jetified-MPAndroidChart-v3.1.0\AndroidManifest.xml:16:5-18:41
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\8f203123dd5e8f2721f8f4b847a39b43\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\8f203123dd5e8f2721f8f4b847a39b43\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\aaddi\.gradle\caches\transforms-3\d5f29026791560de07584b4a4574c1b4\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44

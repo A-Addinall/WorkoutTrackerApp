@@ -181,4 +181,17 @@ class WorkoutRepository(private val dao: WorkoutDao) {
     suspend fun getAllPersonalRecords(): List<PersonalRecord> {
         return dao.getAllPersonalRecords()
     }
+
+    // Add this method to your WorkoutRepository.kt file
+    suspend fun getLatestPRPerExercise(limit: Int = 10): List<PersonalRecord> {
+        val allPRs = dao.getAllPersonalRecords()
+
+        return allPRs
+            .filter { it.recordType == "max_weight" }
+            .groupBy { it.exerciseId }
+            .mapNotNull { (_, prs) -> prs.maxByOrNull { it.value } }
+            .sortedByDescending { it.date }
+            .take(limit)
+    }
+
 }

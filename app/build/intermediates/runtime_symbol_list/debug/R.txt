@@ -3210,6 +3210,7 @@ int id center_vertical 0x7f080079
 int id chain 0x7f08007a
 int id chain2 0x7f08007b
 int id chains 0x7f08007c
+int id chartWeightProgression 0x7f080224
 int id checkbox 0x7f08007d
 int id checked 0x7f08007e
 int id chronometer 0x7f08007f
@@ -3519,6 +3520,7 @@ int id snapMargins 0x7f0801ac
 int id south 0x7f0801ad
 int id spacer 0x7f0801ae
 int id special_effects_controller_view_tag 0x7f0801af
+int id spinnerExerciseSelection 0x7f080225
 int id spinnerUnits 0x7f0801b0
 int id spline 0x7f0801b1
 int id split_action_bar 0x7f0801b2
@@ -3609,6 +3611,7 @@ int id tvTitle 0x7f0801fe
 int id tvTotalPRs 0x7f080221
 int id tvTotalVolume 0x7f080222
 int id tvTotalWorkouts 0x7f080223
+int id tvVolumeIncrease 0x7f080226
 int id tvWorkoutTitle 0x7f0801ff
 int id unchecked 0x7f080200
 int id uniform 0x7f080201
@@ -3748,6 +3751,7 @@ int layout abc_search_view 0x7f0b0019
 int layout abc_select_dialog_material 0x7f0b001a
 int layout abc_tooltip 0x7f0b001b
 int layout activity_analytics 0x7f0b0076
+int layout activity_analytics_enhanced 0x7f0b0079
 int layout activity_exercise_detail 0x7f0b001c
 int layout activity_main 0x7f0b001d
 int layout activity_metcon 0x7f0b001e
@@ -3773,6 +3777,7 @@ int layout design_text_input_end_icon 0x7f0b0031
 int layout design_text_input_start_icon 0x7f0b0032
 int layout ime_base_split_test_activity 0x7f0b0033
 int layout ime_secondary_split_test_activity 0x7f0b0034
+int layout item_enhanced_progress_card 0x7f0b007a
 int layout item_exercise_card 0x7f0b0035
 int layout item_metcon_card 0x7f0b0036
 int layout item_metcon_exercise 0x7f0b0037
