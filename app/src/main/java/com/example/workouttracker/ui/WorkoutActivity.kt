@@ -100,6 +100,7 @@ class WorkoutActivity : AppCompatActivity() {
         layoutExercises.addView(titleView)
     }
 
+    // In WorkoutActivity.kt - Update the addExerciseCard method:
     private fun addExerciseCard(exercise: Exercise) {
         val cardView = layoutInflater.inflate(R.layout.item_exercise_card, layoutExercises, false)
 
@@ -110,13 +111,18 @@ class WorkoutActivity : AppCompatActivity() {
         tvExerciseName.text = exercise.name
         tvRepRange.text = exercise.repRange
 
-        // Get last weight from database
+        // UPDATED: Get last successful weight instead of last session
         CoroutineScope(Dispatchers.Main).launch {
-            val lastSession = (application as WorkoutApplication).repository.lastSession(exercise.id)
-            tvLastWeight.text = if (lastSession?.weight != null && lastSession.weight > 0) {
-                "Last: ${lastSession.weight}kg"
+            val repository = (application as WorkoutApplication).repository
+            val recentSets = repository.getRecentSets(exercise.id, 20)
+            val lastSuccessfulWeight = recentSets
+                .filter { it.isSuccessful }
+                .maxByOrNull { it.weight }?.weight
+
+            tvLastWeight.text = if (lastSuccessfulWeight != null && lastSuccessfulWeight > 0) {
+                "Last successful lift: ${lastSuccessfulWeight}kg"  // ← Updated text
             } else {
-                "No previous data"
+                "No successful lifts yet"  // ← Updated text for no data
             }
         }
 
@@ -126,6 +132,7 @@ class WorkoutActivity : AppCompatActivity() {
 
         layoutExercises.addView(cardView)
     }
+
 
     private fun addMetconCard(exercises: List<Exercise>) {
         val cardView = layoutInflater.inflate(R.layout.item_metcon_card, layoutExercises, false)

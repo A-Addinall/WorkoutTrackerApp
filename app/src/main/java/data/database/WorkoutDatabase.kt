@@ -17,7 +17,7 @@ import com.example.workouttracker.data.entity.*
         ExerciseLibrary::class,
         SetTracking::class
     ],
-    version = 9, // Increment from previous version
+    version = 10, // Incremented to clear duplicate data
     exportSchema = false
 )
 abstract class WorkoutDatabase : RoomDatabase() {
@@ -33,9 +33,7 @@ abstract class WorkoutDatabase : RoomDatabase() {
                     context.applicationContext,
                     WorkoutDatabase::class.java,
                     "workout_database"
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
+                ).build()
                 INSTANCE = instance
                 instance
             }

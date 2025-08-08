@@ -32,7 +32,7 @@ public final class WorkoutDatabase_Impl extends WorkoutDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(9) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(10) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `workout_type` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, PRIMARY KEY(`id`))");
@@ -43,11 +43,11 @@ public final class WorkoutDatabase_Impl extends WorkoutDatabase {
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_personal_record_exerciseId` ON `personal_record` (`exerciseId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `user_settings` (`id` INTEGER NOT NULL, `dark_theme` INTEGER NOT NULL, `auto_weight_increment` REAL NOT NULL, `default_rest_time` INTEGER NOT NULL, `units` TEXT NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `exercise_library` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `category` TEXT NOT NULL, `muscleGroups` TEXT NOT NULL, `equipment` TEXT NOT NULL, `difficulty` TEXT NOT NULL, `instructions` TEXT, `isActive` INTEGER NOT NULL, `isDefault` INTEGER NOT NULL)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `set_tracking` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `workoutSessionId` INTEGER NOT NULL, `exerciseId` INTEGER NOT NULL, `setNumber` INTEGER NOT NULL, `targetReps` INTEGER NOT NULL, `actualReps` INTEGER NOT NULL, `weight` REAL NOT NULL, `isSuccessful` INTEGER NOT NULL, `rpe` INTEGER, FOREIGN KEY(`workoutSessionId`) REFERENCES `workout_session`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`exerciseId`) REFERENCES `exercise`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `set_tracking` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `workoutSessionId` INTEGER NOT NULL, `exerciseId` INTEGER NOT NULL, `setNumber` INTEGER NOT NULL, `targetReps` INTEGER NOT NULL, `actualReps` INTEGER NOT NULL, `weight` REAL NOT NULL, `isSuccessful` INTEGER NOT NULL, `rpe` REAL, FOREIGN KEY(`workoutSessionId`) REFERENCES `workout_session`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`exerciseId`) REFERENCES `exercise`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_set_tracking_workoutSessionId` ON `set_tracking` (`workoutSessionId`)");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_set_tracking_exerciseId` ON `set_tracking` (`exerciseId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f32dca5eda971a699b52cc45043e97f7')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e48d58a0072788c52775fef856d71d1b')");
       }
 
       @Override
@@ -213,7 +213,7 @@ public final class WorkoutDatabase_Impl extends WorkoutDatabase {
         _columnsSetTracking.put("actualReps", new TableInfo.Column("actualReps", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsSetTracking.put("weight", new TableInfo.Column("weight", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsSetTracking.put("isSuccessful", new TableInfo.Column("isSuccessful", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsSetTracking.put("rpe", new TableInfo.Column("rpe", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsSetTracking.put("rpe", new TableInfo.Column("rpe", "REAL", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysSetTracking = new HashSet<TableInfo.ForeignKey>(2);
         _foreignKeysSetTracking.add(new TableInfo.ForeignKey("workout_session", "CASCADE", "NO ACTION", Arrays.asList("workoutSessionId"), Arrays.asList("id")));
         _foreignKeysSetTracking.add(new TableInfo.ForeignKey("exercise", "CASCADE", "NO ACTION", Arrays.asList("exerciseId"), Arrays.asList("id")));
@@ -229,7 +229,7 @@ public final class WorkoutDatabase_Impl extends WorkoutDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "f32dca5eda971a699b52cc45043e97f7", "5b2447193775409ef06cbd567075d450");
+    }, "e48d58a0072788c52775fef856d71d1b", "2f5e59ebc020ba31aa40b5d355189d86");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
