@@ -2,56 +2,65 @@ package com.example.workouttracker
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import com.example.workouttracker.ui.WorkoutViewModel
-import com.example.workouttracker.ui.WorkoutViewModelFactory
-import com.example.workouttracker.ui.ExerciseLibraryActivity
-import com.example.workouttracker.ui.PersonalRecordsActivity
 import com.example.workouttracker.ui.SettingsActivity
+import com.example.workouttracker.ui.AnalyticsActivity
 import com.example.workouttracker.ui.WorkoutActivity
 
 class MainActivity : AppCompatActivity() {
-
-    private val workoutViewModel: WorkoutViewModel by viewModels {
-        WorkoutViewModelFactory((application as WorkoutApplication).repository)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setupClickListeners()
+        setupWorkoutCards()
+        setupProgressCards()
+        setupSettingsCard()
+        setupExerciseLibraryCard()
     }
 
-    private fun setupClickListeners() {
-        // Workout Day Cards
+    private fun setupWorkoutCards() {
+        // Day A - Push Focus
         findViewById<CardView>(R.id.cardDayA).setOnClickListener {
             startWorkoutActivity(1, "Day A - Push Focus")
         }
 
+        // Day B - Pull Focus
         findViewById<CardView>(R.id.cardDayB).setOnClickListener {
             startWorkoutActivity(2, "Day B - Pull Focus")
         }
 
+        // Day C - Legs/Core
         findViewById<CardView>(R.id.cardDayC).setOnClickListener {
             startWorkoutActivity(3, "Day C - Legs/Core")
         }
+    }
 
-        // Exercise Library
-        findViewById<CardView>(R.id.cardExerciseLibrary).setOnClickListener {
-            startActivity(Intent(this, ExerciseLibraryActivity::class.java))
-        }
-
-        // Personal Records
+    private fun setupProgressCards() {
+        // Personal Records - This will open Analytics for now
         findViewById<CardView>(R.id.cardPersonalRecords).setOnClickListener {
-            startActivity(Intent(this, PersonalRecordsActivity::class.java))
+            startActivity(Intent(this, AnalyticsActivity::class.java))
         }
+    }
 
+    private fun setupSettingsCard() {
         // Settings
         findViewById<CardView>(R.id.cardSettings).setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
+        }
+    }
+
+    private fun setupExerciseLibraryCard() {
+        // Exercise Library - Placeholder for future feature
+        findViewById<CardView>(R.id.cardExerciseLibrary).setOnClickListener {
+            // TODO: Implement Exercise Library Activity
+            // For now, we can show a simple message
+            android.widget.Toast.makeText(
+                this,
+                "Exercise Library coming soon!",
+                android.widget.Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

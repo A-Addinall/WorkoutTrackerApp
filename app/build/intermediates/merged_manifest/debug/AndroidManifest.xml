@@ -57,6 +57,11 @@
         <activity
             android:name="com.example.workouttracker.ui.SettingsActivity"
             android:parentActivityName="com.example.workouttracker.MainActivity" />
+
+        <!-- ADD THIS MISSING ACTIVITY -->
+        <activity
+            android:name="com.example.workouttracker.ui.AnalyticsActivity"
+            android:parentActivityName="com.example.workouttracker.MainActivity" />
         <activity
             android:name="com.example.workouttracker.ui.MetconActivity"
             android:parentActivityName="com.example.workouttracker.ui.WorkoutActivity" />

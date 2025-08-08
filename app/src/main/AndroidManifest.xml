@@ -47,6 +47,11 @@
             android:name=".ui.SettingsActivity"
             android:parentActivityName=".MainActivity" />
 
+        <!-- ADD THIS MISSING ACTIVITY -->
+        <activity
+            android:name=".ui.AnalyticsActivity"
+            android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".ui.MetconActivity"
             android:parentActivityName=".ui.WorkoutActivity" />

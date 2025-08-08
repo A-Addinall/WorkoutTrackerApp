@@ -21,8 +21,6 @@ interface WorkoutDao {
     @Query("SELECT * FROM exercise WHERE workoutTypeId = :workoutTypeId")
     suspend fun getExercisesByWorkoutType(workoutTypeId: Int): List<Exercise>
 
-    @Query("SELECT * FROM exercise WHERE id = :exerciseId LIMIT 1")
-    suspend fun getExerciseById(exerciseId: Int): Exercise?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExercise(exercise: Exercise)
@@ -102,4 +100,22 @@ interface WorkoutDao {
     @Query("SELECT weight FROM set_tracking WHERE exerciseId = :exerciseId AND isSuccessful = 1 AND weight IS NOT NULL ORDER BY weight DESC LIMIT 1")
     fun getLastSuccessfulWeightLiveData(exerciseId: Int): LiveData<Double?>
 
+    // Add to WorkoutDao.kt
+    @Query("SELECT pr.* FROM personal_record pr\n" +
+            "    INNER JOIN (\n" +
+            "        SELECT exerciseId, MAX(value) as maxValue \n" +
+            "        FROM personal_record \n" +
+            "        WHERE recordType = 'max_weight'\n" +
+            "        GROUP BY exerciseId\n" +
+            "    ) latest ON pr.exerciseId = latest.exerciseId AND pr.value = latest.maxValue\n" +
+            "    WHERE pr.recordType = 'max_weight'\n" +
+            "    ORDER BY pr.date DESC \n" +
+            "    LIMIT :limit")
+    suspend fun getRecentPersonalRecords(limit: Int): List<PersonalRecord>
+
+    @Query("SELECT * FROM personal_record ORDER BY date DESC")
+    suspend fun getAllPersonalRecords(): List<PersonalRecord>
+
+    @Query("SELECT * FROM exercise WHERE id = :exerciseId LIMIT 1")
+    suspend fun getExerciseById(exerciseId: Int): Exercise?
 }
