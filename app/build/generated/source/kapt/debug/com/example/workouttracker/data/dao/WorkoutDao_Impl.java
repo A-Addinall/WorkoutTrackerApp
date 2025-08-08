@@ -676,69 +676,6 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   }
 
   @Override
-  public Object getExerciseById(final int exerciseId,
-      final Continuation<? super Exercise> $completion) {
-    final String _sql = "SELECT * FROM exercise WHERE id = ? LIMIT 1";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    _statement.bindLong(_argIndex, exerciseId);
-    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
-    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<Exercise>() {
-      @Override
-      @Nullable
-      public Exercise call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
-        try {
-          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-          final int _cursorIndexOfWorkoutTypeId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutTypeId");
-          final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
-          final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfRepRange = CursorUtil.getColumnIndexOrThrow(_cursor, "repRange");
-          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
-          final Exercise _result;
-          if (_cursor.moveToFirst()) {
-            final int _tmpId;
-            _tmpId = _cursor.getInt(_cursorIndexOfId);
-            final int _tmpWorkoutTypeId;
-            _tmpWorkoutTypeId = _cursor.getInt(_cursorIndexOfWorkoutTypeId);
-            final String _tmpName;
-            if (_cursor.isNull(_cursorIndexOfName)) {
-              _tmpName = null;
-            } else {
-              _tmpName = _cursor.getString(_cursorIndexOfName);
-            }
-            final String _tmpCategory;
-            if (_cursor.isNull(_cursorIndexOfCategory)) {
-              _tmpCategory = null;
-            } else {
-              _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
-            }
-            final String _tmpRepRange;
-            if (_cursor.isNull(_cursorIndexOfRepRange)) {
-              _tmpRepRange = null;
-            } else {
-              _tmpRepRange = _cursor.getString(_cursorIndexOfRepRange);
-            }
-            final String _tmpDescription;
-            if (_cursor.isNull(_cursorIndexOfDescription)) {
-              _tmpDescription = null;
-            } else {
-              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
-            }
-            _result = new Exercise(_tmpId,_tmpWorkoutTypeId,_tmpName,_tmpCategory,_tmpRepRange,_tmpDescription);
-          } else {
-            _result = null;
-          }
-          return _result;
-        } finally {
-          _cursor.close();
-          _statement.release();
-        }
-      }
-    }, $completion);
-  }
-
-  @Override
   public Object getLastSession(final int exerciseId,
       final Continuation<? super WorkoutSession> $completion) {
     final String _sql = "SELECT * FROM workout_session WHERE exerciseId = ? ORDER BY date DESC LIMIT 1";
@@ -1535,6 +1472,186 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         _statement.release();
       }
     });
+  }
+
+  @Override
+  public Object getRecentPersonalRecords(final int limit,
+      final Continuation<? super List<PersonalRecord>> $completion) {
+    final String _sql = "SELECT pr.* FROM personal_record pr\n"
+            + "    INNER JOIN (\n"
+            + "        SELECT exerciseId, MAX(value) as maxValue \n"
+            + "        FROM personal_record \n"
+            + "        WHERE recordType = 'max_weight'\n"
+            + "        GROUP BY exerciseId\n"
+            + "    ) latest ON pr.exerciseId = latest.exerciseId AND pr.value = latest.maxValue\n"
+            + "    WHERE pr.recordType = 'max_weight'\n"
+            + "    ORDER BY pr.date DESC \n"
+            + "    LIMIT ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, limit);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<PersonalRecord>>() {
+      @Override
+      @NonNull
+      public List<PersonalRecord> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfExerciseId = CursorUtil.getColumnIndexOrThrow(_cursor, "exerciseId");
+          final int _cursorIndexOfRecordType = CursorUtil.getColumnIndexOrThrow(_cursor, "recordType");
+          final int _cursorIndexOfValue = CursorUtil.getColumnIndexOrThrow(_cursor, "value");
+          final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
+          final int _cursorIndexOfNotes = CursorUtil.getColumnIndexOrThrow(_cursor, "notes");
+          final List<PersonalRecord> _result = new ArrayList<PersonalRecord>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final PersonalRecord _item;
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final int _tmpExerciseId;
+            _tmpExerciseId = _cursor.getInt(_cursorIndexOfExerciseId);
+            final String _tmpRecordType;
+            if (_cursor.isNull(_cursorIndexOfRecordType)) {
+              _tmpRecordType = null;
+            } else {
+              _tmpRecordType = _cursor.getString(_cursorIndexOfRecordType);
+            }
+            final double _tmpValue;
+            _tmpValue = _cursor.getDouble(_cursorIndexOfValue);
+            final long _tmpDate;
+            _tmpDate = _cursor.getLong(_cursorIndexOfDate);
+            final String _tmpNotes;
+            if (_cursor.isNull(_cursorIndexOfNotes)) {
+              _tmpNotes = null;
+            } else {
+              _tmpNotes = _cursor.getString(_cursorIndexOfNotes);
+            }
+            _item = new PersonalRecord(_tmpId,_tmpExerciseId,_tmpRecordType,_tmpValue,_tmpDate,_tmpNotes);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object getAllPersonalRecords(
+      final Continuation<? super List<PersonalRecord>> $completion) {
+    final String _sql = "SELECT * FROM personal_record ORDER BY date DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<PersonalRecord>>() {
+      @Override
+      @NonNull
+      public List<PersonalRecord> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfExerciseId = CursorUtil.getColumnIndexOrThrow(_cursor, "exerciseId");
+          final int _cursorIndexOfRecordType = CursorUtil.getColumnIndexOrThrow(_cursor, "recordType");
+          final int _cursorIndexOfValue = CursorUtil.getColumnIndexOrThrow(_cursor, "value");
+          final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
+          final int _cursorIndexOfNotes = CursorUtil.getColumnIndexOrThrow(_cursor, "notes");
+          final List<PersonalRecord> _result = new ArrayList<PersonalRecord>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final PersonalRecord _item;
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final int _tmpExerciseId;
+            _tmpExerciseId = _cursor.getInt(_cursorIndexOfExerciseId);
+            final String _tmpRecordType;
+            if (_cursor.isNull(_cursorIndexOfRecordType)) {
+              _tmpRecordType = null;
+            } else {
+              _tmpRecordType = _cursor.getString(_cursorIndexOfRecordType);
+            }
+            final double _tmpValue;
+            _tmpValue = _cursor.getDouble(_cursorIndexOfValue);
+            final long _tmpDate;
+            _tmpDate = _cursor.getLong(_cursorIndexOfDate);
+            final String _tmpNotes;
+            if (_cursor.isNull(_cursorIndexOfNotes)) {
+              _tmpNotes = null;
+            } else {
+              _tmpNotes = _cursor.getString(_cursorIndexOfNotes);
+            }
+            _item = new PersonalRecord(_tmpId,_tmpExerciseId,_tmpRecordType,_tmpValue,_tmpDate,_tmpNotes);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object getExerciseById(final int exerciseId,
+      final Continuation<? super Exercise> $completion) {
+    final String _sql = "SELECT * FROM exercise WHERE id = ? LIMIT 1";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, exerciseId);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<Exercise>() {
+      @Override
+      @Nullable
+      public Exercise call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfWorkoutTypeId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutTypeId");
+          final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
+          final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfRepRange = CursorUtil.getColumnIndexOrThrow(_cursor, "repRange");
+          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
+          final Exercise _result;
+          if (_cursor.moveToFirst()) {
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final int _tmpWorkoutTypeId;
+            _tmpWorkoutTypeId = _cursor.getInt(_cursorIndexOfWorkoutTypeId);
+            final String _tmpName;
+            if (_cursor.isNull(_cursorIndexOfName)) {
+              _tmpName = null;
+            } else {
+              _tmpName = _cursor.getString(_cursorIndexOfName);
+            }
+            final String _tmpCategory;
+            if (_cursor.isNull(_cursorIndexOfCategory)) {
+              _tmpCategory = null;
+            } else {
+              _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
+            }
+            final String _tmpRepRange;
+            if (_cursor.isNull(_cursorIndexOfRepRange)) {
+              _tmpRepRange = null;
+            } else {
+              _tmpRepRange = _cursor.getString(_cursorIndexOfRepRange);
+            }
+            final String _tmpDescription;
+            if (_cursor.isNull(_cursorIndexOfDescription)) {
+              _tmpDescription = null;
+            } else {
+              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+            }
+            _result = new Exercise(_tmpId,_tmpWorkoutTypeId,_tmpName,_tmpCategory,_tmpRepRange,_tmpDescription);
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
   }
 
   @NonNull

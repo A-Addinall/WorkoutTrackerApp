@@ -172,4 +172,13 @@ class WorkoutRepository(private val dao: WorkoutDao) {
         // We'll need to add this to the DAO as well
         return dao.getLastSuccessfulWeightLiveData(exerciseId)
     }
+
+    suspend fun getRecentPersonalRecords(limit: Int = 10): List<PersonalRecord> {
+        // You'll need to add this method to your DAO first
+        return dao.getRecentPersonalRecords(limit)
+    }
+
+    suspend fun getAllPersonalRecords(): List<PersonalRecord> {
+        return dao.getAllPersonalRecords()
+    }
 }
