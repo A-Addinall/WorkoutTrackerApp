@@ -17,7 +17,7 @@ import com.example.workouttracker.data.entity.*
         ExerciseLibrary::class,
         SetTracking::class
     ],
-    version = 10, // Incremented to clear duplicate data
+    version = 11, // Incremented to clear duplicate data
     exportSchema = false
 )
 abstract class WorkoutDatabase : RoomDatabase() {

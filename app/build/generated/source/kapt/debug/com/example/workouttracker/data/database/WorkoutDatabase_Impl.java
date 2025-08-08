@@ -32,7 +32,7 @@ public final class WorkoutDatabase_Impl extends WorkoutDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(10) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(11) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `workout_type` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, PRIMARY KEY(`id`))");
@@ -41,13 +41,13 @@ public final class WorkoutDatabase_Impl extends WorkoutDatabase {
         db.execSQL("CREATE TABLE IF NOT EXISTS `workout_session` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `exerciseId` INTEGER NOT NULL, `date` INTEGER NOT NULL, `sets` INTEGER NOT NULL, `reps` INTEGER NOT NULL, `weight` REAL, `time` INTEGER, `notes` TEXT)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `personal_record` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `exerciseId` INTEGER NOT NULL, `recordType` TEXT NOT NULL, `value` REAL NOT NULL, `date` INTEGER NOT NULL, `notes` TEXT, FOREIGN KEY(`exerciseId`) REFERENCES `exercise`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_personal_record_exerciseId` ON `personal_record` (`exerciseId`)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS `user_settings` (`id` INTEGER NOT NULL, `dark_theme` INTEGER NOT NULL, `auto_weight_increment` REAL NOT NULL, `default_rest_time` INTEGER NOT NULL, `units` TEXT NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `user_settings` (`id` INTEGER NOT NULL, `darkTheme` INTEGER NOT NULL, `autoWeightIncrement` REAL NOT NULL, `defaultRestTime` INTEGER NOT NULL, `units` TEXT NOT NULL, `showPersonalRecords` INTEGER NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS `exercise_library` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `category` TEXT NOT NULL, `muscleGroups` TEXT NOT NULL, `equipment` TEXT NOT NULL, `difficulty` TEXT NOT NULL, `instructions` TEXT, `isActive` INTEGER NOT NULL, `isDefault` INTEGER NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `set_tracking` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `workoutSessionId` INTEGER NOT NULL, `exerciseId` INTEGER NOT NULL, `setNumber` INTEGER NOT NULL, `targetReps` INTEGER NOT NULL, `actualReps` INTEGER NOT NULL, `weight` REAL NOT NULL, `isSuccessful` INTEGER NOT NULL, `rpe` REAL, FOREIGN KEY(`workoutSessionId`) REFERENCES `workout_session`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`exerciseId`) REFERENCES `exercise`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_set_tracking_workoutSessionId` ON `set_tracking` (`workoutSessionId`)");
         db.execSQL("CREATE INDEX IF NOT EXISTS `index_set_tracking_exerciseId` ON `set_tracking` (`exerciseId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e48d58a0072788c52775fef856d71d1b')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '69553af81e920a88adc80d2ee86317c6')");
       }
 
       @Override
@@ -170,12 +170,13 @@ public final class WorkoutDatabase_Impl extends WorkoutDatabase {
                   + " Expected:\n" + _infoPersonalRecord + "\n"
                   + " Found:\n" + _existingPersonalRecord);
         }
-        final HashMap<String, TableInfo.Column> _columnsUserSettings = new HashMap<String, TableInfo.Column>(5);
+        final HashMap<String, TableInfo.Column> _columnsUserSettings = new HashMap<String, TableInfo.Column>(6);
         _columnsUserSettings.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserSettings.put("dark_theme", new TableInfo.Column("dark_theme", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserSettings.put("auto_weight_increment", new TableInfo.Column("auto_weight_increment", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsUserSettings.put("default_rest_time", new TableInfo.Column("default_rest_time", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserSettings.put("darkTheme", new TableInfo.Column("darkTheme", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserSettings.put("autoWeightIncrement", new TableInfo.Column("autoWeightIncrement", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserSettings.put("defaultRestTime", new TableInfo.Column("defaultRestTime", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsUserSettings.put("units", new TableInfo.Column("units", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsUserSettings.put("showPersonalRecords", new TableInfo.Column("showPersonalRecords", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysUserSettings = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesUserSettings = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoUserSettings = new TableInfo("user_settings", _columnsUserSettings, _foreignKeysUserSettings, _indicesUserSettings);
@@ -229,7 +230,7 @@ public final class WorkoutDatabase_Impl extends WorkoutDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "e48d58a0072788c52775fef856d71d1b", "2f5e59ebc020ba31aa40b5d355189d86");
+    }, "69553af81e920a88adc80d2ee86317c6", "023457e7c74ee2f81b556d82582e5cee");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;

@@ -16,15 +16,15 @@ class WeightSuggestionEngine {
 
         // Find the last successful lift
         val lastSuccessfulSet = recentSets
-            .filter { it.isSuccessful } // Only successful lifts
-            .maxByOrNull { it.weight }   // Get the heaviest successful lift
+            .filter { it.isSuccessful }
+            .maxByOrNull { it.weight }
 
         return if (lastSuccessfulSet != null) {
-            // Simple progression: last successful weight + 2.5kg
-            val suggested = lastSuccessfulSet.weight + 2.5
+            // Use user's preferred increment instead of hardcoded 2.5kg
+            val increment = userSettings.autoWeightIncrement
+            val suggested = lastSuccessfulSet.weight + increment
             roundToNearestPlate(suggested)
         } else {
-            // No successful lifts found, use starting weight
             getStartingWeight(exerciseId, exerciseName)
         }
     }
