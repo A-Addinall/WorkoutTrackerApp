@@ -3211,6 +3211,7 @@ id center_vertical
 id chain
 id chain2
 id chains
+id chartWeightProgression
 id checkbox
 id checked
 id chronometer
@@ -3520,6 +3521,7 @@ id snapMargins
 id south
 id spacer
 id special_effects_controller_view_tag
+id spinnerExerciseSelection
 id spinnerUnits
 id spline
 id split_action_bar
@@ -3610,6 +3612,7 @@ id tvTitle
 id tvTotalPRs
 id tvTotalVolume
 id tvTotalWorkouts
+id tvVolumeIncrease
 id tvWorkoutTitle
 id unchecked
 id uniform
@@ -3749,6 +3752,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_analytics
+layout activity_analytics_enhanced
 layout activity_exercise_detail
 layout activity_main
 layout activity_metcon
@@ -3774,6 +3778,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout item_enhanced_progress_card
 layout item_exercise_card
 layout item_metcon_card
 layout item_metcon_exercise

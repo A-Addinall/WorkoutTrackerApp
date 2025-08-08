@@ -37,11 +37,6 @@ class WorkoutActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val repository = (application as WorkoutApplication).repository
             val dayAExercises = repository.getExercises(1) // Day A
-            println("DEBUG: Day A total exercises: ${dayAExercises.size}")
-
-            dayAExercises.forEach { exercise ->
-                println("DEBUG: Exercise: ${exercise.name} | Category: ${exercise.category} | ID: ${exercise.id}")
-            }
 
             // Check for actual duplicates
             val duplicates = dayAExercises.groupBy { it.name }.filter { it.value.size > 1 }
