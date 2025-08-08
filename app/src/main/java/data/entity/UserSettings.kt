@@ -5,23 +5,15 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
+
 @Entity(tableName = "user_settings")
 data class UserSettings(
-    @PrimaryKey
-    @ColumnInfo(name = "id")
-    val id: Int,
-
-    @ColumnInfo(name = "dark_theme")
-    val darkTheme: Boolean,
-
-    @ColumnInfo(name = "auto_weight_increment")
-    val autoWeightIncrement: Double,
-
-    @ColumnInfo(name = "default_rest_time")
-    val defaultRestTime: Int,
-
-    @ColumnInfo(name = "units")
-    val units: String
+    @PrimaryKey val id: Int = 1,
+    val darkTheme: Boolean = false,
+    val autoWeightIncrement: Double = 2.5, // Now user-configurable
+    val defaultRestTime: Int = 120, // For rest timer
+    val units: String = "kg",
+    val showPersonalRecords: Boolean = true // For PR features
 ) {
     @Ignore
     constructor() : this(

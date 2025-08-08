@@ -205,7 +205,7 @@ public final class WorkoutDao_Impl implements WorkoutDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `user_settings` (`id`,`dark_theme`,`auto_weight_increment`,`default_rest_time`,`units`) VALUES (?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `user_settings` (`id`,`darkTheme`,`autoWeightIncrement`,`defaultRestTime`,`units`,`showPersonalRecords`) VALUES (?,?,?,?,?,?)";
       }
 
       @Override
@@ -221,6 +221,8 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         } else {
           statement.bindString(5, entity.getUnits());
         }
+        final int _tmp_1 = entity.getShowPersonalRecords() ? 1 : 0;
+        statement.bindLong(6, _tmp_1);
       }
     };
     this.__insertionAdapterOfExerciseLibrary = new EntityInsertionAdapter<ExerciseLibrary>(__db) {
@@ -274,7 +276,7 @@ public final class WorkoutDao_Impl implements WorkoutDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `user_settings` SET `id` = ?,`dark_theme` = ?,`auto_weight_increment` = ?,`default_rest_time` = ?,`units` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `user_settings` SET `id` = ?,`darkTheme` = ?,`autoWeightIncrement` = ?,`defaultRestTime` = ?,`units` = ?,`showPersonalRecords` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -290,7 +292,9 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         } else {
           statement.bindString(5, entity.getUnits());
         }
-        statement.bindLong(6, entity.getId());
+        final int _tmp_1 = entity.getShowPersonalRecords() ? 1 : 0;
+        statement.bindLong(6, _tmp_1);
+        statement.bindLong(7, entity.getId());
       }
     };
     this.__updateAdapterOfExerciseLibrary = new EntityDeletionOrUpdateAdapter<ExerciseLibrary>(__db) {
@@ -1256,10 +1260,11 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-          final int _cursorIndexOfDarkTheme = CursorUtil.getColumnIndexOrThrow(_cursor, "dark_theme");
-          final int _cursorIndexOfAutoWeightIncrement = CursorUtil.getColumnIndexOrThrow(_cursor, "auto_weight_increment");
-          final int _cursorIndexOfDefaultRestTime = CursorUtil.getColumnIndexOrThrow(_cursor, "default_rest_time");
+          final int _cursorIndexOfDarkTheme = CursorUtil.getColumnIndexOrThrow(_cursor, "darkTheme");
+          final int _cursorIndexOfAutoWeightIncrement = CursorUtil.getColumnIndexOrThrow(_cursor, "autoWeightIncrement");
+          final int _cursorIndexOfDefaultRestTime = CursorUtil.getColumnIndexOrThrow(_cursor, "defaultRestTime");
           final int _cursorIndexOfUnits = CursorUtil.getColumnIndexOrThrow(_cursor, "units");
+          final int _cursorIndexOfShowPersonalRecords = CursorUtil.getColumnIndexOrThrow(_cursor, "showPersonalRecords");
           final UserSettings _result;
           if (_cursor.moveToFirst()) {
             final int _tmpId;
@@ -1278,7 +1283,11 @@ public final class WorkoutDao_Impl implements WorkoutDao {
             } else {
               _tmpUnits = _cursor.getString(_cursorIndexOfUnits);
             }
-            _result = new UserSettings(_tmpId,_tmpDarkTheme,_tmpAutoWeightIncrement,_tmpDefaultRestTime,_tmpUnits);
+            final boolean _tmpShowPersonalRecords;
+            final int _tmp_1;
+            _tmp_1 = _cursor.getInt(_cursorIndexOfShowPersonalRecords);
+            _tmpShowPersonalRecords = _tmp_1 != 0;
+            _result = new UserSettings(_tmpId,_tmpDarkTheme,_tmpAutoWeightIncrement,_tmpDefaultRestTime,_tmpUnits,_tmpShowPersonalRecords);
           } else {
             _result = null;
           }

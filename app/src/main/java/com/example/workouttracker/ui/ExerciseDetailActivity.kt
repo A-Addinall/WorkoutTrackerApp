@@ -8,10 +8,12 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.workouttracker.R
 import com.example.workouttracker.WorkoutApplication
-import com.example.workouttracker.data.entity.WorkoutSession
+import com.example.workouttracker.data.entity.PersonalRecord
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import androidx.appcompat.app.AlertDialog
+import android.view.Gravity
 
 class ExerciseDetailActivity : AppCompatActivity() {
 
@@ -69,16 +71,20 @@ class ExerciseDetailActivity : AppCompatActivity() {
         }
     }
 
-    // In ExerciseDetailActivity.kt - Update the setupObservers method:
     private fun setupObservers() {
         val repository = (application as WorkoutApplication).repository
 
-        // UPDATED: Observe last successful weight instead of just last weight
-        repository.getLastSuccessfulWeightLiveData(exerciseId).observe(this) { lastSuccessfulWeight: Double? ->
+        // Load last successful weight
+        CoroutineScope(Dispatchers.Main).launch {
+            val recentSets = repository.getRecentSets(exerciseId, 20)
+            val lastSuccessfulWeight = recentSets
+                .filter { it.isSuccessful }
+                .maxByOrNull { it.weight }?.weight
+
             tvLastWeight.text = if (lastSuccessfulWeight != null && lastSuccessfulWeight > 0) {
-                "Last successful lift: ${lastSuccessfulWeight}kg"  // ← Updated text
+                "Last successful lift: ${lastSuccessfulWeight}kg"
             } else {
-                "No successful lifts yet"  // ← Updated text for no data
+                "No successful lifts yet"
             }
         }
 
@@ -88,7 +94,6 @@ class ExerciseDetailActivity : AppCompatActivity() {
             tvSuggestedWeight.text = "Suggested: ${suggestedWeight}kg"
         }
     }
-
 
     private fun loadInitialData() {
         // Add one initial set
@@ -123,6 +128,12 @@ class ExerciseDetailActivity : AppCompatActivity() {
 
             if (weight != null && reps > 0) {
                 lifecycleScope.launch {
+                    // Check if this is a new PR before logging
+                    val currentPR = (application as WorkoutApplication).repository
+                        .getPersonalRecord(exerciseId, "max_weight")
+
+                    val isNewPR = currentPR == null || weight > currentPR.value
+
                     (application as WorkoutApplication).repository.logStrength(
                         exerciseId = exerciseId,
                         sets = 1,
@@ -133,13 +144,42 @@ class ExerciseDetailActivity : AppCompatActivity() {
                         notes = etNotes.text.toString().ifEmpty { null }
                     )
 
-                    // FIXED: Update local SetData to track success
-                    setData.isSuccessful = true
+                    // Save new PR if achieved
+                    if (isNewPR) {
+                        val personalRecord = PersonalRecord(
+                            exerciseId = exerciseId,
+                            recordType = "max_weight",
+                            value = weight,
+                            date = System.currentTimeMillis(),
+                            notes = "New max weight PR!"
+                        )
+                        (application as WorkoutApplication).repository.insertPersonalRecord(personalRecord)
 
+                        // Custom centered dialog for PR celebration
+                        AlertDialog.Builder(this@ExerciseDetailActivity)
+                            .setTitle("🎉 PERSONAL RECORD! 🎉")
+                            .setMessage("New max weight: ${weight}kg\n\nCongratulations!")
+                            .setPositiveButton("Awesome!") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .setCancelable(true)
+                            .show()
+                    } else {
+                        // Center the regular success toast
+                        val toast = Toast.makeText(
+                            this@ExerciseDetailActivity,
+                            "✅ Set logged as successful!",
+                            Toast.LENGTH_SHORT
+                        )
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+
+                    // Update local tracking
+                    setData.isSuccessful = true
                     btnSuccess.setBackgroundColor(ContextCompat.getColor(this@ExerciseDetailActivity, android.R.color.holo_green_light))
                     btnFail.setBackgroundColor(ContextCompat.getColor(this@ExerciseDetailActivity, android.R.color.darker_gray))
 
-                    Toast.makeText(this@ExerciseDetailActivity, "✅ Set logged as successful!", Toast.LENGTH_SHORT).show()
                     updateSuggestedWeight()
                 }
             } else {
@@ -163,9 +203,8 @@ class ExerciseDetailActivity : AppCompatActivity() {
                         notes = etNotes.text.toString().ifEmpty { null }
                     )
 
-                    // FIXED: Update local SetData to track failure
+                    // Update local tracking
                     setData.isSuccessful = false
-
                     btnFail.setBackgroundColor(ContextCompat.getColor(this@ExerciseDetailActivity, android.R.color.holo_red_light))
                     btnSuccess.setBackgroundColor(ContextCompat.getColor(this@ExerciseDetailActivity, android.R.color.darker_gray))
 
