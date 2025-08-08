@@ -3,47 +3,18 @@ package com.example.workouttracker.data.repository
 import androidx.lifecycle.LiveData
 import com.example.workouttracker.data.dao.WorkoutDao
 import com.example.workouttracker.data.entity.*
-import com.example.workouttracker.data.database.DatabaseInitializer
 import com.example.workouttracker.logic.WeightSuggestionEngine
 
 class WorkoutRepository(private val dao: WorkoutDao) {
 
-    // Remove this initialization:
-    // private val databaseInitializer = DatabaseInitializer()
-    // init {
-    //     databaseInitializer.initializeDatabase(dao)
-    // }
-
-    // Keep everything else the same...
     private val weightSuggestionEngine = WeightSuggestionEngine()
-
 
     // Smart weight suggestion using your WeightSuggestionEngine
     suspend fun getSuggestedWeight(exerciseId: Int): Double? {
         return try {
-            // Get exercise details
             val exercise = dao.getExerciseById(exerciseId)
-
-            // Get recent WorkoutSession data instead of SetTracking
-            val recentSessions = dao.getRecentWorkoutSessions(exerciseId, 10)
-
-            // Convert WorkoutSession to SetTracking format for the engine
-            val recentSets = recentSessions.mapNotNull { session ->
-                session.weight?.let { weight ->
-                    SetTracking(
-                        id = 0,
-                        workoutSessionId = session.id,
-                        exerciseId = session.exerciseId,
-                        setNumber = 1,
-                        targetReps = session.reps,
-                        actualReps = session.reps,
-                        weight = weight,
-                        isSuccessful = true, // Assume successful for now
-                        rpe = 7 // Default RPE value
-                    )
-                }
-            }
-
+            // Use SetTracking data directly for real success/failure data
+            val recentSets = dao.getRecentSets(exerciseId, 10)
             val userSettings = dao.getUserSettings() ?: getDefaultUserSettings()
 
             weightSuggestionEngine.suggestWeight(
@@ -68,6 +39,49 @@ class WorkoutRepository(private val dao: WorkoutDao) {
         )
     }
 
+    // Main logStrength method with success/failure tracking
+    suspend fun logStrength(
+        exerciseId: Int,
+        sets: Int,
+        reps: Int,
+        weight: Double?,
+        isSuccessful: Boolean,
+        rpe: Double = 7.0,
+        notes: String? = null
+    ): Long {
+        val session = WorkoutSession(
+            exerciseId = exerciseId,
+            date = System.currentTimeMillis(),
+            sets = sets,
+            reps = reps,
+            weight = weight,
+            time = null,
+            notes = notes
+        )
+        val sessionId = dao.insertWorkoutSession(session)
+
+        // Also create SetTracking record with success/failure data
+        val setTracking = SetTracking(
+            id = 0,
+            workoutSessionId = sessionId.toInt(),
+            exerciseId = exerciseId,
+            setNumber = 1,
+            targetReps = reps,
+            actualReps = reps,
+            weight = weight ?: 0.0,
+            isSuccessful = isSuccessful,
+            rpe = rpe
+        )
+        dao.insertSetTracking(setTracking)
+
+        return sessionId
+    }
+
+    // Overloaded method for backward compatibility
+    suspend fun logStrength(exerciseId: Int, sets: Int, reps: Int, weight: Double?): Long {
+        return logStrength(exerciseId, sets, reps, weight, true, 7.0, null)
+    }
+
     suspend fun getWorkoutTypes(): List<WorkoutType> {
         return dao.getAllWorkoutTypes()
     }
@@ -82,19 +96,6 @@ class WorkoutRepository(private val dao: WorkoutDao) {
 
     fun getLastWeightLiveData(exerciseId: Int): LiveData<Double?> {
         return dao.getLastWeightForExerciseLiveData(exerciseId)
-    }
-
-    suspend fun logStrength(exerciseId: Int, sets: Int, reps: Int, weight: Double?, notes: String? = null): Long {
-        val session = WorkoutSession(
-            exerciseId = exerciseId,
-            date = System.currentTimeMillis(),
-            sets = sets,
-            reps = reps,
-            weight = weight,
-            time = null,
-            notes = notes
-        )
-        return dao.insertWorkoutSession(session)
     }
 
     suspend fun logMetcon(exerciseId: Int, timeInSeconds: Long, notes: String? = null): Long {
@@ -156,5 +157,19 @@ class WorkoutRepository(private val dao: WorkoutDao) {
 
     suspend fun getAllActiveExercises(): List<ExerciseLibrary> {
         return dao.getAllActiveExercises()
+    }
+
+    suspend fun getLastSuccessfulWeight(exerciseId: Int): Double? {
+        // Get recent successful sets and find the heaviest one
+        val successfulSets = dao.getRecentSets(exerciseId, 20) // Get more sets to find successes
+            .filter { it.isSuccessful } // Only successful lifts
+
+        return successfulSets.maxByOrNull { it.weight }?.weight
+    }
+
+    // Also add a LiveData version for real-time updates:
+    fun getLastSuccessfulWeightLiveData(exerciseId: Int): LiveData<Double?> {
+        // We'll need to add this to the DAO as well
+        return dao.getLastSuccessfulWeightLiveData(exerciseId)
     }
 }

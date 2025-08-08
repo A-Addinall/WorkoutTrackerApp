@@ -40,11 +40,9 @@ import kotlin.coroutines.Continuation;
 public final class WorkoutDao_Impl implements WorkoutDao {
   private final RoomDatabase __db;
 
-  private final EntityInsertionAdapter<Exercise> __insertionAdapterOfExercise;
-
-  private final EntityInsertionAdapter<ExerciseLibrary> __insertionAdapterOfExerciseLibrary;
-
   private final EntityInsertionAdapter<WorkoutType> __insertionAdapterOfWorkoutType;
+
+  private final EntityInsertionAdapter<Exercise> __insertionAdapterOfExercise;
 
   private final EntityInsertionAdapter<WorkoutSession> __insertionAdapterOfWorkoutSession;
 
@@ -54,12 +52,37 @@ public final class WorkoutDao_Impl implements WorkoutDao {
 
   private final EntityInsertionAdapter<UserSettings> __insertionAdapterOfUserSettings;
 
+  private final EntityInsertionAdapter<ExerciseLibrary> __insertionAdapterOfExerciseLibrary;
+
   private final EntityDeletionOrUpdateAdapter<UserSettings> __updateAdapterOfUserSettings;
 
   private final EntityDeletionOrUpdateAdapter<ExerciseLibrary> __updateAdapterOfExerciseLibrary;
 
   public WorkoutDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
+    this.__insertionAdapterOfWorkoutType = new EntityInsertionAdapter<WorkoutType>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "INSERT OR REPLACE INTO `workout_type` (`id`,`name`,`description`) VALUES (?,?,?)";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final WorkoutType entity) {
+        statement.bindLong(1, entity.getId());
+        if (entity.getName() == null) {
+          statement.bindNull(2);
+        } else {
+          statement.bindString(2, entity.getName());
+        }
+        if (entity.getDescription() == null) {
+          statement.bindNull(3);
+        } else {
+          statement.bindString(3, entity.getDescription());
+        }
+      }
+    };
     this.__insertionAdapterOfExercise = new EntityInsertionAdapter<Exercise>(__db) {
       @Override
       @NonNull
@@ -91,76 +114,6 @@ public final class WorkoutDao_Impl implements WorkoutDao {
           statement.bindNull(6);
         } else {
           statement.bindString(6, entity.getDescription());
-        }
-      }
-    };
-    this.__insertionAdapterOfExerciseLibrary = new EntityInsertionAdapter<ExerciseLibrary>(__db) {
-      @Override
-      @NonNull
-      protected String createQuery() {
-        return "INSERT OR REPLACE INTO `exercise_library` (`id`,`name`,`category`,`muscleGroups`,`equipment`,`difficulty`,`instructions`,`isActive`,`isDefault`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?)";
-      }
-
-      @Override
-      protected void bind(@NonNull final SupportSQLiteStatement statement,
-          @NonNull final ExerciseLibrary entity) {
-        statement.bindLong(1, entity.getId());
-        if (entity.getName() == null) {
-          statement.bindNull(2);
-        } else {
-          statement.bindString(2, entity.getName());
-        }
-        if (entity.getCategory() == null) {
-          statement.bindNull(3);
-        } else {
-          statement.bindString(3, entity.getCategory());
-        }
-        if (entity.getMuscleGroups() == null) {
-          statement.bindNull(4);
-        } else {
-          statement.bindString(4, entity.getMuscleGroups());
-        }
-        if (entity.getEquipment() == null) {
-          statement.bindNull(5);
-        } else {
-          statement.bindString(5, entity.getEquipment());
-        }
-        if (entity.getDifficulty() == null) {
-          statement.bindNull(6);
-        } else {
-          statement.bindString(6, entity.getDifficulty());
-        }
-        if (entity.getInstructions() == null) {
-          statement.bindNull(7);
-        } else {
-          statement.bindString(7, entity.getInstructions());
-        }
-        final int _tmp = entity.isActive() ? 1 : 0;
-        statement.bindLong(8, _tmp);
-        final int _tmp_1 = entity.isDefault() ? 1 : 0;
-        statement.bindLong(9, _tmp_1);
-      }
-    };
-    this.__insertionAdapterOfWorkoutType = new EntityInsertionAdapter<WorkoutType>(__db) {
-      @Override
-      @NonNull
-      protected String createQuery() {
-        return "INSERT OR REPLACE INTO `workout_type` (`id`,`name`,`description`) VALUES (?,?,?)";
-      }
-
-      @Override
-      protected void bind(@NonNull final SupportSQLiteStatement statement,
-          @NonNull final WorkoutType entity) {
-        statement.bindLong(1, entity.getId());
-        if (entity.getName() == null) {
-          statement.bindNull(2);
-        } else {
-          statement.bindString(2, entity.getName());
-        }
-        if (entity.getDescription() == null) {
-          statement.bindNull(3);
-        } else {
-          statement.bindString(3, entity.getDescription());
         }
       }
     };
@@ -218,7 +171,7 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         if (entity.getRpe() == null) {
           statement.bindNull(9);
         } else {
-          statement.bindLong(9, entity.getRpe());
+          statement.bindDouble(9, entity.getRpe());
         }
       }
     };
@@ -268,6 +221,53 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         } else {
           statement.bindString(5, entity.getUnits());
         }
+      }
+    };
+    this.__insertionAdapterOfExerciseLibrary = new EntityInsertionAdapter<ExerciseLibrary>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "INSERT OR REPLACE INTO `exercise_library` (`id`,`name`,`category`,`muscleGroups`,`equipment`,`difficulty`,`instructions`,`isActive`,`isDefault`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?)";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final ExerciseLibrary entity) {
+        statement.bindLong(1, entity.getId());
+        if (entity.getName() == null) {
+          statement.bindNull(2);
+        } else {
+          statement.bindString(2, entity.getName());
+        }
+        if (entity.getCategory() == null) {
+          statement.bindNull(3);
+        } else {
+          statement.bindString(3, entity.getCategory());
+        }
+        if (entity.getMuscleGroups() == null) {
+          statement.bindNull(4);
+        } else {
+          statement.bindString(4, entity.getMuscleGroups());
+        }
+        if (entity.getEquipment() == null) {
+          statement.bindNull(5);
+        } else {
+          statement.bindString(5, entity.getEquipment());
+        }
+        if (entity.getDifficulty() == null) {
+          statement.bindNull(6);
+        } else {
+          statement.bindString(6, entity.getDifficulty());
+        }
+        if (entity.getInstructions() == null) {
+          statement.bindNull(7);
+        } else {
+          statement.bindString(7, entity.getInstructions());
+        }
+        final int _tmp = entity.isActive() ? 1 : 0;
+        statement.bindLong(8, _tmp);
+        final int _tmp_1 = entity.isDefault() ? 1 : 0;
+        statement.bindLong(9, _tmp_1);
       }
     };
     this.__updateAdapterOfUserSettings = new EntityDeletionOrUpdateAdapter<UserSettings>(__db) {
@@ -344,44 +344,6 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   }
 
   @Override
-  public Object insertExercises(final List<Exercise> exercises,
-      final Continuation<? super Unit> $completion) {
-    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
-      @Override
-      @NonNull
-      public Unit call() throws Exception {
-        __db.beginTransaction();
-        try {
-          __insertionAdapterOfExercise.insert(exercises);
-          __db.setTransactionSuccessful();
-          return Unit.INSTANCE;
-        } finally {
-          __db.endTransaction();
-        }
-      }
-    }, $completion);
-  }
-
-  @Override
-  public Object insertExerciseLibrary(final ExerciseLibrary exerciseLibrary,
-      final Continuation<? super Unit> $completion) {
-    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
-      @Override
-      @NonNull
-      public Unit call() throws Exception {
-        __db.beginTransaction();
-        try {
-          __insertionAdapterOfExerciseLibrary.insert(exerciseLibrary);
-          __db.setTransactionSuccessful();
-          return Unit.INSTANCE;
-        } finally {
-          __db.endTransaction();
-        }
-      }
-    }, $completion);
-  }
-
-  @Override
   public Object insertWorkoutType(final WorkoutType workoutType,
       final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
@@ -410,6 +372,25 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         __db.beginTransaction();
         try {
           __insertionAdapterOfExercise.insert(exercise);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object insertExercises(final List<Exercise> exercises,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __insertionAdapterOfExercise.insert(exercises);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -496,6 +477,25 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   }
 
   @Override
+  public Object insertExerciseLibrary(final ExerciseLibrary exerciseLibrary,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __insertionAdapterOfExerciseLibrary.insert(exerciseLibrary);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
   public Object updateUserSettings(final UserSettings userSettings,
       final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
@@ -515,7 +515,7 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   }
 
   @Override
-  public Object updateExerciseLibrary(final ExerciseLibrary exercise,
+  public Object updateExerciseLibrary(final ExerciseLibrary exerciseLibrary,
       final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
@@ -523,11 +523,54 @@ public final class WorkoutDao_Impl implements WorkoutDao {
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __updateAdapterOfExerciseLibrary.handle(exercise);
+          __updateAdapterOfExerciseLibrary.handle(exerciseLibrary);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
           __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object getAllWorkoutTypes(final Continuation<? super List<WorkoutType>> $completion) {
+    final String _sql = "SELECT * FROM workout_type";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<WorkoutType>>() {
+      @Override
+      @NonNull
+      public List<WorkoutType> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
+          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
+          final List<WorkoutType> _result = new ArrayList<WorkoutType>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final WorkoutType _item;
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final String _tmpName;
+            if (_cursor.isNull(_cursorIndexOfName)) {
+              _tmpName = null;
+            } else {
+              _tmpName = _cursor.getString(_cursorIndexOfName);
+            }
+            final String _tmpDescription;
+            if (_cursor.isNull(_cursorIndexOfDescription)) {
+              _tmpDescription = null;
+            } else {
+              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+            }
+            _item = new WorkoutType(_tmpId,_tmpName,_tmpDescription);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
         }
       }
     }, $completion);
@@ -566,61 +609,57 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   }
 
   @Override
-  public Object getRecentWorkoutSessions(final int exerciseId, final int limit,
-      final Continuation<? super List<WorkoutSession>> $completion) {
-    final String _sql = "SELECT * FROM workout_session WHERE exerciseId = ? AND weight IS NOT NULL ORDER BY date DESC LIMIT ?";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
+  public Object getExercisesByWorkoutType(final int workoutTypeId,
+      final Continuation<? super List<Exercise>> $completion) {
+    final String _sql = "SELECT * FROM exercise WHERE workoutTypeId = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
-    _statement.bindLong(_argIndex, exerciseId);
-    _argIndex = 2;
-    _statement.bindLong(_argIndex, limit);
+    _statement.bindLong(_argIndex, workoutTypeId);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
-    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<WorkoutSession>>() {
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<Exercise>>() {
       @Override
       @NonNull
-      public List<WorkoutSession> call() throws Exception {
+      public List<Exercise> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-          final int _cursorIndexOfExerciseId = CursorUtil.getColumnIndexOrThrow(_cursor, "exerciseId");
-          final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
-          final int _cursorIndexOfSets = CursorUtil.getColumnIndexOrThrow(_cursor, "sets");
-          final int _cursorIndexOfReps = CursorUtil.getColumnIndexOrThrow(_cursor, "reps");
-          final int _cursorIndexOfWeight = CursorUtil.getColumnIndexOrThrow(_cursor, "weight");
-          final int _cursorIndexOfTime = CursorUtil.getColumnIndexOrThrow(_cursor, "time");
-          final int _cursorIndexOfNotes = CursorUtil.getColumnIndexOrThrow(_cursor, "notes");
-          final List<WorkoutSession> _result = new ArrayList<WorkoutSession>(_cursor.getCount());
+          final int _cursorIndexOfWorkoutTypeId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutTypeId");
+          final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
+          final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
+          final int _cursorIndexOfRepRange = CursorUtil.getColumnIndexOrThrow(_cursor, "repRange");
+          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
+          final List<Exercise> _result = new ArrayList<Exercise>(_cursor.getCount());
           while (_cursor.moveToNext()) {
-            final WorkoutSession _item;
+            final Exercise _item;
             final int _tmpId;
             _tmpId = _cursor.getInt(_cursorIndexOfId);
-            final int _tmpExerciseId;
-            _tmpExerciseId = _cursor.getInt(_cursorIndexOfExerciseId);
-            final long _tmpDate;
-            _tmpDate = _cursor.getLong(_cursorIndexOfDate);
-            final int _tmpSets;
-            _tmpSets = _cursor.getInt(_cursorIndexOfSets);
-            final int _tmpReps;
-            _tmpReps = _cursor.getInt(_cursorIndexOfReps);
-            final Double _tmpWeight;
-            if (_cursor.isNull(_cursorIndexOfWeight)) {
-              _tmpWeight = null;
+            final int _tmpWorkoutTypeId;
+            _tmpWorkoutTypeId = _cursor.getInt(_cursorIndexOfWorkoutTypeId);
+            final String _tmpName;
+            if (_cursor.isNull(_cursorIndexOfName)) {
+              _tmpName = null;
             } else {
-              _tmpWeight = _cursor.getDouble(_cursorIndexOfWeight);
+              _tmpName = _cursor.getString(_cursorIndexOfName);
             }
-            final Long _tmpTime;
-            if (_cursor.isNull(_cursorIndexOfTime)) {
-              _tmpTime = null;
+            final String _tmpCategory;
+            if (_cursor.isNull(_cursorIndexOfCategory)) {
+              _tmpCategory = null;
             } else {
-              _tmpTime = _cursor.getLong(_cursorIndexOfTime);
+              _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
             }
-            final String _tmpNotes;
-            if (_cursor.isNull(_cursorIndexOfNotes)) {
-              _tmpNotes = null;
+            final String _tmpRepRange;
+            if (_cursor.isNull(_cursorIndexOfRepRange)) {
+              _tmpRepRange = null;
             } else {
-              _tmpNotes = _cursor.getString(_cursorIndexOfNotes);
+              _tmpRepRange = _cursor.getString(_cursorIndexOfRepRange);
             }
-            _item = new WorkoutSession(_tmpId,_tmpExerciseId,_tmpDate,_tmpSets,_tmpReps,_tmpWeight,_tmpTime,_tmpNotes);
+            final String _tmpDescription;
+            if (_cursor.isNull(_cursorIndexOfDescription)) {
+              _tmpDescription = null;
+            } else {
+              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+            }
+            _item = new Exercise(_tmpId,_tmpWorkoutTypeId,_tmpName,_tmpCategory,_tmpRepRange,_tmpDescription);
             _result.add(_item);
           }
           return _result;
@@ -685,144 +724,6 @@ public final class WorkoutDao_Impl implements WorkoutDao {
             _result = new Exercise(_tmpId,_tmpWorkoutTypeId,_tmpName,_tmpCategory,_tmpRepRange,_tmpDescription);
           } else {
             _result = null;
-          }
-          return _result;
-        } finally {
-          _cursor.close();
-          _statement.release();
-        }
-      }
-    }, $completion);
-  }
-
-  @Override
-  public Object getExerciseLibraryCount(final Continuation<? super Integer> $completion) {
-    final String _sql = "SELECT COUNT(*) FROM exercise_library";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
-    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<Integer>() {
-      @Override
-      @NonNull
-      public Integer call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
-        try {
-          final Integer _result;
-          if (_cursor.moveToFirst()) {
-            final Integer _tmp;
-            if (_cursor.isNull(0)) {
-              _tmp = null;
-            } else {
-              _tmp = _cursor.getInt(0);
-            }
-            _result = _tmp;
-          } else {
-            _result = null;
-          }
-          return _result;
-        } finally {
-          _cursor.close();
-          _statement.release();
-        }
-      }
-    }, $completion);
-  }
-
-  @Override
-  public Object getAllWorkoutTypes(final Continuation<? super List<WorkoutType>> $completion) {
-    final String _sql = "SELECT * FROM workout_type";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
-    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<WorkoutType>>() {
-      @Override
-      @NonNull
-      public List<WorkoutType> call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
-        try {
-          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-          final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
-          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
-          final List<WorkoutType> _result = new ArrayList<WorkoutType>(_cursor.getCount());
-          while (_cursor.moveToNext()) {
-            final WorkoutType _item;
-            final int _tmpId;
-            _tmpId = _cursor.getInt(_cursorIndexOfId);
-            final String _tmpName;
-            if (_cursor.isNull(_cursorIndexOfName)) {
-              _tmpName = null;
-            } else {
-              _tmpName = _cursor.getString(_cursorIndexOfName);
-            }
-            final String _tmpDescription;
-            if (_cursor.isNull(_cursorIndexOfDescription)) {
-              _tmpDescription = null;
-            } else {
-              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
-            }
-            _item = new WorkoutType(_tmpId,_tmpName,_tmpDescription);
-            _result.add(_item);
-          }
-          return _result;
-        } finally {
-          _cursor.close();
-          _statement.release();
-        }
-      }
-    }, $completion);
-  }
-
-  @Override
-  public Object getExercisesByWorkoutType(final int workoutTypeId,
-      final Continuation<? super List<Exercise>> $completion) {
-    final String _sql = "SELECT * FROM exercise WHERE workoutTypeId = ?";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    _statement.bindLong(_argIndex, workoutTypeId);
-    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
-    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<Exercise>>() {
-      @Override
-      @NonNull
-      public List<Exercise> call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
-        try {
-          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
-          final int _cursorIndexOfWorkoutTypeId = CursorUtil.getColumnIndexOrThrow(_cursor, "workoutTypeId");
-          final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
-          final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
-          final int _cursorIndexOfRepRange = CursorUtil.getColumnIndexOrThrow(_cursor, "repRange");
-          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
-          final List<Exercise> _result = new ArrayList<Exercise>(_cursor.getCount());
-          while (_cursor.moveToNext()) {
-            final Exercise _item;
-            final int _tmpId;
-            _tmpId = _cursor.getInt(_cursorIndexOfId);
-            final int _tmpWorkoutTypeId;
-            _tmpWorkoutTypeId = _cursor.getInt(_cursorIndexOfWorkoutTypeId);
-            final String _tmpName;
-            if (_cursor.isNull(_cursorIndexOfName)) {
-              _tmpName = null;
-            } else {
-              _tmpName = _cursor.getString(_cursorIndexOfName);
-            }
-            final String _tmpCategory;
-            if (_cursor.isNull(_cursorIndexOfCategory)) {
-              _tmpCategory = null;
-            } else {
-              _tmpCategory = _cursor.getString(_cursorIndexOfCategory);
-            }
-            final String _tmpRepRange;
-            if (_cursor.isNull(_cursorIndexOfRepRange)) {
-              _tmpRepRange = null;
-            } else {
-              _tmpRepRange = _cursor.getString(_cursorIndexOfRepRange);
-            }
-            final String _tmpDescription;
-            if (_cursor.isNull(_cursorIndexOfDescription)) {
-              _tmpDescription = null;
-            } else {
-              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
-            }
-            _item = new Exercise(_tmpId,_tmpWorkoutTypeId,_tmpName,_tmpCategory,_tmpRepRange,_tmpDescription);
-            _result.add(_item);
           }
           return _result;
         } finally {
@@ -933,7 +834,7 @@ public final class WorkoutDao_Impl implements WorkoutDao {
 
   @Override
   public LiveData<Long> getLastMetconTimeLiveData(final int exerciseId) {
-    final String _sql = "SELECT COALESCE(time, 0) FROM workout_session WHERE exerciseId = ? AND time IS NOT NULL ORDER BY date DESC LIMIT 1";
+    final String _sql = "SELECT time FROM workout_session WHERE exerciseId = ? AND time IS NOT NULL ORDER BY date DESC LIMIT 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, exerciseId);
@@ -945,13 +846,11 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         try {
           final Long _result;
           if (_cursor.moveToFirst()) {
-            final Long _tmp;
             if (_cursor.isNull(0)) {
-              _tmp = null;
+              _result = null;
             } else {
-              _tmp = _cursor.getLong(0);
+              _result = _cursor.getLong(0);
             }
-            _result = _tmp;
           } else {
             _result = null;
           }
@@ -966,6 +865,73 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         _statement.release();
       }
     });
+  }
+
+  @Override
+  public Object getRecentWorkoutSessions(final int exerciseId, final int limit,
+      final Continuation<? super List<WorkoutSession>> $completion) {
+    final String _sql = "SELECT * FROM workout_session WHERE exerciseId = ? AND weight IS NOT NULL ORDER BY date DESC LIMIT ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, exerciseId);
+    _argIndex = 2;
+    _statement.bindLong(_argIndex, limit);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<WorkoutSession>>() {
+      @Override
+      @NonNull
+      public List<WorkoutSession> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfExerciseId = CursorUtil.getColumnIndexOrThrow(_cursor, "exerciseId");
+          final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
+          final int _cursorIndexOfSets = CursorUtil.getColumnIndexOrThrow(_cursor, "sets");
+          final int _cursorIndexOfReps = CursorUtil.getColumnIndexOrThrow(_cursor, "reps");
+          final int _cursorIndexOfWeight = CursorUtil.getColumnIndexOrThrow(_cursor, "weight");
+          final int _cursorIndexOfTime = CursorUtil.getColumnIndexOrThrow(_cursor, "time");
+          final int _cursorIndexOfNotes = CursorUtil.getColumnIndexOrThrow(_cursor, "notes");
+          final List<WorkoutSession> _result = new ArrayList<WorkoutSession>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final WorkoutSession _item;
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final int _tmpExerciseId;
+            _tmpExerciseId = _cursor.getInt(_cursorIndexOfExerciseId);
+            final long _tmpDate;
+            _tmpDate = _cursor.getLong(_cursorIndexOfDate);
+            final int _tmpSets;
+            _tmpSets = _cursor.getInt(_cursorIndexOfSets);
+            final int _tmpReps;
+            _tmpReps = _cursor.getInt(_cursorIndexOfReps);
+            final Double _tmpWeight;
+            if (_cursor.isNull(_cursorIndexOfWeight)) {
+              _tmpWeight = null;
+            } else {
+              _tmpWeight = _cursor.getDouble(_cursorIndexOfWeight);
+            }
+            final Long _tmpTime;
+            if (_cursor.isNull(_cursorIndexOfTime)) {
+              _tmpTime = null;
+            } else {
+              _tmpTime = _cursor.getLong(_cursorIndexOfTime);
+            }
+            final String _tmpNotes;
+            if (_cursor.isNull(_cursorIndexOfNotes)) {
+              _tmpNotes = null;
+            } else {
+              _tmpNotes = _cursor.getString(_cursorIndexOfNotes);
+            }
+            _item = new WorkoutSession(_tmpId,_tmpExerciseId,_tmpDate,_tmpSets,_tmpReps,_tmpWeight,_tmpTime,_tmpNotes);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
   }
 
   @Override
@@ -1014,11 +980,11 @@ public final class WorkoutDao_Impl implements WorkoutDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsSuccessful);
             _tmpIsSuccessful = _tmp != 0;
-            final Integer _tmpRpe;
+            final Double _tmpRpe;
             if (_cursor.isNull(_cursorIndexOfRpe)) {
               _tmpRpe = null;
             } else {
-              _tmpRpe = _cursor.getInt(_cursorIndexOfRpe);
+              _tmpRpe = _cursor.getDouble(_cursorIndexOfRpe);
             }
             _item = new SetTracking(_tmpId,_tmpWorkoutSessionId,_tmpExerciseId,_tmpSetNumber,_tmpTargetReps,_tmpActualReps,_tmpWeight,_tmpIsSuccessful,_tmpRpe);
             _result.add(_item);
@@ -1035,7 +1001,7 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   @Override
   public Object getSetsForSession(final int sessionId,
       final Continuation<? super List<SetTracking>> $completion) {
-    final String _sql = "SELECT * FROM set_tracking WHERE workoutSessionId = ? ORDER BY setNumber ASC";
+    final String _sql = "SELECT * FROM set_tracking WHERE workoutSessionId = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, sessionId);
@@ -1076,11 +1042,11 @@ public final class WorkoutDao_Impl implements WorkoutDao {
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsSuccessful);
             _tmpIsSuccessful = _tmp != 0;
-            final Integer _tmpRpe;
+            final Double _tmpRpe;
             if (_cursor.isNull(_cursorIndexOfRpe)) {
               _tmpRpe = null;
             } else {
-              _tmpRpe = _cursor.getInt(_cursorIndexOfRpe);
+              _tmpRpe = _cursor.getDouble(_cursorIndexOfRpe);
             }
             _item = new SetTracking(_tmpId,_tmpWorkoutSessionId,_tmpExerciseId,_tmpSetNumber,_tmpTargetReps,_tmpActualReps,_tmpWeight,_tmpIsSuccessful,_tmpRpe);
             _result.add(_item);
@@ -1165,7 +1131,7 @@ public final class WorkoutDao_Impl implements WorkoutDao {
   @Override
   public Object getPersonalRecord(final int exerciseId, final String type,
       final Continuation<? super PersonalRecord> $completion) {
-    final String _sql = "SELECT * FROM personal_record WHERE exerciseId = ? AND recordType = ? ORDER BY date DESC LIMIT 1";
+    final String _sql = "SELECT * FROM personal_record WHERE exerciseId = ? AND recordType = ? ORDER BY value DESC LIMIT 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, exerciseId);
@@ -1313,6 +1279,38 @@ public final class WorkoutDao_Impl implements WorkoutDao {
               _tmpUnits = _cursor.getString(_cursorIndexOfUnits);
             }
             _result = new UserSettings(_tmpId,_tmpDarkTheme,_tmpAutoWeightIncrement,_tmpDefaultRestTime,_tmpUnits);
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+          _statement.release();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object getExerciseLibraryCount(final Continuation<? super Integer> $completion) {
+    final String _sql = "SELECT COUNT(*) FROM exercise_library";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<Integer>() {
+      @Override
+      @NonNull
+      public Integer call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final Integer _result;
+          if (_cursor.moveToFirst()) {
+            final Integer _tmp;
+            if (_cursor.isNull(0)) {
+              _tmp = null;
+            } else {
+              _tmp = _cursor.getInt(0);
+            }
+            _result = _tmp;
           } else {
             _result = null;
           }
@@ -1493,6 +1491,41 @@ public final class WorkoutDao_Impl implements WorkoutDao {
         }
       }
     }, $completion);
+  }
+
+  @Override
+  public LiveData<Double> getLastSuccessfulWeightLiveData(final int exerciseId) {
+    final String _sql = "SELECT weight FROM set_tracking WHERE exerciseId = ? AND isSuccessful = 1 AND weight IS NOT NULL ORDER BY weight DESC LIMIT 1";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, exerciseId);
+    return __db.getInvalidationTracker().createLiveData(new String[] {"set_tracking"}, false, new Callable<Double>() {
+      @Override
+      @Nullable
+      public Double call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final Double _result;
+          if (_cursor.moveToFirst()) {
+            if (_cursor.isNull(0)) {
+              _result = null;
+            } else {
+              _result = _cursor.getDouble(0);
+            }
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
   }
 
   @NonNull

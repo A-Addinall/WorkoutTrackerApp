@@ -23,8 +23,10 @@ import androidx.room.PrimaryKey
         )
     ]
 )
+
 data class SetTracking(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val workoutSessionId: Int,
     val exerciseId: Int,
     val setNumber: Int,
@@ -32,5 +34,5 @@ data class SetTracking(
     val actualReps: Int,
     val weight: Double,
     val isSuccessful: Boolean,
-    val rpe: Int? = null // Rate of Perceived Exertion 1-10
+    val rpe: Double? = null  // ← Make it nullable with Double?
 )

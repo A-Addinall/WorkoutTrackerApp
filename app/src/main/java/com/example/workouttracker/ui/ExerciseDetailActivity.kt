@@ -5,13 +5,13 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.workouttracker.R
 import com.example.workouttracker.WorkoutApplication
 import com.example.workouttracker.data.entity.WorkoutSession
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 
 class ExerciseDetailActivity : AppCompatActivity() {
 
@@ -69,15 +69,16 @@ class ExerciseDetailActivity : AppCompatActivity() {
         }
     }
 
+    // In ExerciseDetailActivity.kt - Update the setupObservers method:
     private fun setupObservers() {
         val repository = (application as WorkoutApplication).repository
 
-        // Fix: Explicitly specify Double? type for lastWeight parameter
-        repository.getLastWeightLiveData(exerciseId).observe(this) { lastWeight: Double? ->
-            tvLastWeight.text = if (lastWeight != null && lastWeight > 0) {
-                "Last: ${lastWeight}kg"
+        // UPDATED: Observe last successful weight instead of just last weight
+        repository.getLastSuccessfulWeightLiveData(exerciseId).observe(this) { lastSuccessfulWeight: Double? ->
+            tvLastWeight.text = if (lastSuccessfulWeight != null && lastSuccessfulWeight > 0) {
+                "Last successful lift: ${lastSuccessfulWeight}kg"  // ← Updated text
             } else {
-                "No previous data"
+                "No successful lifts yet"  // ← Updated text for no data
             }
         }
 
@@ -87,7 +88,6 @@ class ExerciseDetailActivity : AppCompatActivity() {
             tvSuggestedWeight.text = "Suggested: ${suggestedWeight}kg"
         }
     }
-
 
 
     private fun loadInitialData() {
@@ -113,64 +113,90 @@ class ExerciseDetailActivity : AppCompatActivity() {
             etWeight.hint = suggestedWeight.toString()
         }
 
-        var isSuccessful: Boolean? = null
+        // Create SetData object first and add to list
+        val setData = SetData(setNumber, etWeight, etReps, null)
+        currentSets.add(setData)
 
         btnSuccess.setOnClickListener {
-            isSuccessful = true
-            btnSuccess.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_green_light))
-            btnFail.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
+            val weight = etWeight.text.toString().toDoubleOrNull()
+            val reps = etReps.text.toString().toIntOrNull() ?: 1
+
+            if (weight != null && reps > 0) {
+                lifecycleScope.launch {
+                    (application as WorkoutApplication).repository.logStrength(
+                        exerciseId = exerciseId,
+                        sets = 1,
+                        reps = reps,
+                        weight = weight,
+                        isSuccessful = true,
+                        rpe = 6.0,
+                        notes = etNotes.text.toString().ifEmpty { null }
+                    )
+
+                    // FIXED: Update local SetData to track success
+                    setData.isSuccessful = true
+
+                    btnSuccess.setBackgroundColor(ContextCompat.getColor(this@ExerciseDetailActivity, android.R.color.holo_green_light))
+                    btnFail.setBackgroundColor(ContextCompat.getColor(this@ExerciseDetailActivity, android.R.color.darker_gray))
+
+                    Toast.makeText(this@ExerciseDetailActivity, "✅ Set logged as successful!", Toast.LENGTH_SHORT).show()
+                    updateSuggestedWeight()
+                }
+            } else {
+                Toast.makeText(this@ExerciseDetailActivity, "Please enter valid weight and reps", Toast.LENGTH_SHORT).show()
+            }
         }
 
         btnFail.setOnClickListener {
-            isSuccessful = false
-            btnFail.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_red_light))
-            btnSuccess.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
-        }
+            val weight = etWeight.text.toString().toDoubleOrNull()
+            val reps = etReps.text.toString().toIntOrNull() ?: 1
 
-        val setData = SetData(setNumber, etWeight, etReps, isSuccessful)
-        currentSets.add(setData)
+            if (weight != null && reps > 0) {
+                lifecycleScope.launch {
+                    (application as WorkoutApplication).repository.logStrength(
+                        exerciseId = exerciseId,
+                        sets = 1,
+                        reps = reps,
+                        weight = weight,
+                        isSuccessful = false,
+                        rpe = 9.0,
+                        notes = etNotes.text.toString().ifEmpty { null }
+                    )
+
+                    // FIXED: Update local SetData to track failure
+                    setData.isSuccessful = false
+
+                    btnFail.setBackgroundColor(ContextCompat.getColor(this@ExerciseDetailActivity, android.R.color.holo_red_light))
+                    btnSuccess.setBackgroundColor(ContextCompat.getColor(this@ExerciseDetailActivity, android.R.color.darker_gray))
+
+                    Toast.makeText(this@ExerciseDetailActivity, "❌ Set logged as failed!", Toast.LENGTH_SHORT).show()
+                    updateSuggestedWeight()
+                }
+            } else {
+                Toast.makeText(this@ExerciseDetailActivity, "Please enter valid weight and reps", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         layoutSets.addView(setView)
     }
 
-    private fun completeExercise() {
-        var hasValidSets = false
-
+    private fun updateSuggestedWeight() {
         CoroutineScope(Dispatchers.Main).launch {
-            val sessionId = System.currentTimeMillis().toInt()
-
-            currentSets.forEach { setData ->
-                val weight = setData.etWeight.text.toString().toDoubleOrNull() ?: 0.0
-                val reps = setData.etReps.text.toString().toIntOrNull() ?: 0
-
-                if (weight > 0 && reps > 0) {
-                    hasValidSets = true
-
-                    // Save to WorkoutSession (this is what your working metcon uses)
-                    val workoutSession = WorkoutSession(
-                        exerciseId = exerciseId,
-                        date = System.currentTimeMillis(),
-                        sets = 1,  // Individual set
-                        reps = reps,
-                        weight = weight,
-                        time = null  // Only metcon uses time
-                    )
-
-                    (application as WorkoutApplication).repository.logStrength(
-                        exerciseId, 1, reps, weight
-                    )
-                }
-            }
-
-            if (hasValidSets) {
-                Toast.makeText(this@ExerciseDetailActivity, "Exercise completed successfully!", Toast.LENGTH_SHORT).show()
-                finish()
-            } else {
-                Toast.makeText(this@ExerciseDetailActivity, "Please complete at least one set", Toast.LENGTH_SHORT).show()
-            }
+            val suggestedWeight = (application as WorkoutApplication).repository.getSuggestedWeight(exerciseId)
+            tvSuggestedWeight.text = "Suggested: ${suggestedWeight}kg"
         }
     }
 
+    private fun completeExercise() {
+        val loggedSets = currentSets.count { it.isSuccessful != null }
+
+        if (loggedSets > 0) {
+            Toast.makeText(this, "Exercise completed! $loggedSets sets logged.", Toast.LENGTH_SHORT).show()
+            finish()
+        } else {
+            Toast.makeText(this, "Please complete at least one set by clicking Success or Fail", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun extractTargetReps(repRange: String): Int {
         return repRange.split("-").firstOrNull()?.filter { it.isDigit() }?.toIntOrNull() ?: 8
